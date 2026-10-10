@@ -115,10 +115,10 @@ export const portfolio = {
     { name: 'LinkedIn', url: 'https://www.linkedin.com/in/prince-tyagi-2147482aa/' },
   ],
   leetcode: {
-    lastReported: 'Last reported 10 Oct 2026',
-    solved: '259', easy: '202', medium: '51', hard: '6',
-    rating: '1,480', contests: '1', streak: '45 days', badges: '2',
-    badgeNote: 'Includes 100 Days Badge 2026',
+    lastReported: 'Last verified 11 Oct 2026',
+    solved: '260', easy: '202', medium: '52', hard: '6',
+    rating: '1,480', contests: '1', streak: '46 days', badges: '2',
+    badgeNote: 'Includes 100 Days Badge 2026 & 50 Days Badge 2026',
   },
 };
 
