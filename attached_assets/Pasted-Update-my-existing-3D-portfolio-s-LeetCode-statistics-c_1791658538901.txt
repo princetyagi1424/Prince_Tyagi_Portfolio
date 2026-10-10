@@ -1,0 +1,24 @@
+Update my existing 3D portfolio's LeetCode statistics card to fetch REAL, CURRENT public statistics from my LeetCode profile instead of displaying permanently hardcoded values.
+
+**My LeetCode profile**
+- Username: `princeytyagi`
+- Profile URL: https://leetcode.com/u/princeytyagi/
+
+**Requirements**
+
+1. Fetch the latest available statistics, including total solved problems, Easy/Medium/Hard counts, contest rating, contests attended, maximum streak, and badges where the public API supports them.
+2. Use LeetCode's public GraphQL interface through a backend/serverless API route, or a reliable public API wrapper if needed. Do not call an unreliable endpoint directly from the browser when it causes CORS issues.
+3. Refresh statistics:
+   - When the portfolio page loads.
+   - When the visitor returns to the portfolio tab.
+   - Automatically every 5 minutes while the page is open.
+   - When the visitor clicks a **“Refresh Stats”** button.
+4. Add a visible **Last updated** timestamp that changes only after a successful fetch.
+5. Show loading, error, and refresh states gracefully. If fetching fails, retain the last successfully fetched data and clearly label it as cached/stale. Never replace missing values with fake zeros.
+6. Use sensible caching, request timeouts, error handling, and rate-limit protection. Do not make constant requests or require my LeetCode password, session cookie, or private credentials.
+7. Remove the existing hardcoded statistics as the primary data source. The previously recorded values may be used only as a clearly labelled fallback until the first successful fetch.
+8. Keep the existing premium 3D portfolio design, colors, spacing, responsive layout, and card styling unchanged. Update the existing LeetCode card in place; do not redesign the whole portfolio.
+9. Ensure the API works in the actual Replit development and deployed environments. Test successful fetching, failed requests, refreshing, and responsive layouts. Do not claim successful testing unless it was actually performed.
+10. Do not fabricate live statistics. If a field is unavailable from the public data source, show “Unavailable” or omit that field.
+
+**Important:** LeetCode does not guarantee an immediate push notification to this portfolio when I solve a problem. Use periodic polling and manual refresh so the card updates when the latest statistics become available. Implement the complete working change, not just a visual mockup.
