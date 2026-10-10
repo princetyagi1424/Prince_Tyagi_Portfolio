@@ -97,6 +97,8 @@ export const portfolio = {
       type: 'Certificate of Accomplishment · Skill certification',
       description: 'Passed the HackerRank Java (Basic) skill certification test.',
       date: '12 August 2026',
+      image: '/certificates/hackerrank-java-basic.png',
+      alt: 'HackerRank Certificate of Accomplishment for Java (Basic) awarded to Prince Tyagi on 12 August 2026',
       profile: 'https://www.hackerrank.com/profile/princetyagi3726',
     },
   ],
