@@ -4,30 +4,31 @@ const router: IRouter = Router();
 
 const LEETCODE_USERNAME = "princeytyagi";
 
-// In-memory cache
 interface CachedData {
   data: any;
   timestamp: number;
 }
 
 let cache: CachedData | null = null;
-const CACHE_TTL_MS = 60 * 1000; // 1 minute cache
+const CACHE_TTL_MS = 60 * 1000; // 1 minute memory cache
 
 const FALLBACK_DATA = {
   username: LEETCODE_USERNAME,
-  totalSolved: 259,
-  easySolved: 202,
-  mediumSolved: 51,
+  totalSolved: 261,
+  easySolved: 203,
+  mediumSolved: 52,
   hardSolved: 6,
   contestRating: 1480,
   contestsAttended: 1,
   globalRanking: null,
-  streak: 45,
+  topPercentage: null,
+  streak: 46,
   badgesCount: 2,
-  badgeNote: "Includes 100 Days Badge",
-  lastReported: "Last verified snapshot",
+  badgeNote: "100 Days Badge 2026, 50 Days Badge 2026",
+  lastReported: "Historical verified snapshot (11 Oct 2026)",
   isLive: false,
-  fetchedAt: new Date().toISOString(),
+  stale: true,
+  verifiedAt: "2026-10-11T00:00:00.000Z",
 };
 
 async function fetchLeetCodeStats(username: string) {
@@ -68,7 +69,7 @@ async function fetchLeetCodeStats(username: string) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
         Referer: "https://leetcode.com",
       },
       body: JSON.stringify({
@@ -93,10 +94,10 @@ async function fetchLeetCodeStats(username: string) {
     const acStats = user.submitStatsGlobal?.acSubmissionNum || [];
     const contest = result.data.userContestRanking;
 
-    let totalSolved = 0;
-    let easySolved = 0;
-    let mediumSolved = 0;
-    let hardSolved = 0;
+    let totalSolved: number | null = null;
+    let easySolved: number | null = null;
+    let mediumSolved: number | null = null;
+    let hardSolved: number | null = null;
 
     for (const item of acStats) {
       if (item.difficulty === "All") totalSolved = item.count;
@@ -105,26 +106,36 @@ async function fetchLeetCodeStats(username: string) {
       else if (item.difficulty === "Hard") hardSolved = item.count;
     }
 
+    if (totalSolved === null && (easySolved !== null || mediumSolved !== null || hardSolved !== null)) {
+      totalSolved = (easySolved || 0) + (mediumSolved || 0) + (hardSolved || 0);
+    }
+
+    if (totalSolved === null) {
+      throw new Error("Unable to parse solved question counts from response");
+    }
+
     const badges = user.badges || [];
-    const streak = user.userCalendar?.streak || FALLBACK_DATA.streak;
-    const rating = contest?.rating ? Math.round(contest.rating) : FALLBACK_DATA.contestRating;
-    const contests = contest?.attendedContestsCount ?? FALLBACK_DATA.contestsAttended;
+    const streak = typeof user.userCalendar?.streak === "number" ? user.userCalendar.streak : null;
+    const rating = contest?.rating ? Math.round(contest.rating) : null;
+    const contests = typeof contest?.attendedContestsCount === "number" ? contest.attendedContestsCount : null;
 
     return {
       username,
-      totalSolved: totalSolved || FALLBACK_DATA.totalSolved,
-      easySolved: easySolved || FALLBACK_DATA.easySolved,
-      mediumSolved: mediumSolved || FALLBACK_DATA.mediumSolved,
-      hardSolved: hardSolved || FALLBACK_DATA.hardSolved,
+      totalSolved,
+      easySolved: easySolved ?? 0,
+      mediumSolved: mediumSolved ?? 0,
+      hardSolved: hardSolved ?? 0,
       contestRating: rating,
       contestsAttended: contests,
       globalRanking: contest?.globalRanking || null,
       topPercentage: contest?.topPercentage || null,
       streak,
-      badgesCount: badges.length || FALLBACK_DATA.badgesCount,
-      badgeNote: badges.length > 0 ? badges.map((b: any) => b.displayName).slice(0, 2).join(", ") : FALLBACK_DATA.badgeNote,
+      badgesCount: badges.length,
+      badgeNote: badges.length > 0 ? badges.map((b: any) => b.displayName).slice(0, 2).join(", ") : null,
       lastReported: "Live via LeetCode GraphQL",
       isLive: true,
+      stale: false,
+      cached: false,
       fetchedAt: new Date().toISOString(),
     };
   } catch (err) {
@@ -151,7 +162,7 @@ const handleStats = async (_req: any, res: any) => {
       cached: false,
     });
   } catch (err: any) {
-    // If we have stale cache, return it
+    // If we have existing cache, serve with stale note
     if (cache) {
       return res.json({
         ...cache.data,
@@ -161,12 +172,12 @@ const handleStats = async (_req: any, res: any) => {
       });
     }
 
-    // Otherwise return verified fallback data
+    // Otherwise return verified historical fallback data
     return res.json({
       ...FALLBACK_DATA,
       cached: false,
       stale: true,
-      error: "Serving verified base data",
+      error: "Serving verified historical base data",
     });
   }
 };

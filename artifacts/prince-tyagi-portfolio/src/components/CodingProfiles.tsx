@@ -1,15 +1,23 @@
-import { ArrowUpRight, RotateCw, Sparkles, CheckCircle2 } from 'lucide-react';
+import { ArrowUpRight, RotateCw, Clock } from 'lucide-react';
 import { portfolio } from '../data/portfolio';
 import { useLeetCodeStats } from '../hooks/useLeetCodeStats';
+
+/** Format a nullable value for display; returns '—' when unavailable. */
+function fmt(v: number | string | null | undefined): string {
+  if (v === null || v === undefined) return '—';
+  return v.toString();
+}
 
 export function CodingProfiles() {
   const { stats, isLoading, error, refresh } = useLeetCodeStats();
 
-  const statItems = [
-    [stats.easySolved.toString(), 'Easy'],
-    [stats.mediumSolved.toString(), 'Medium'],
-    [stats.hardSolved.toString(), 'Hard'],
-    [stats.contestRating.toString(), 'Rating'],
+  const isHistorical = !stats.isLive && stats.isStale;
+
+  const statItems: [string, string][] = [
+    [fmt(stats.easySolved), 'Easy'],
+    [fmt(stats.mediumSolved), 'Medium'],
+    [fmt(stats.hardSolved), 'Hard'],
+    [fmt(stats.contestRating), 'Rating'],
   ];
 
   return (
@@ -46,23 +54,49 @@ export function CodingProfiles() {
               ))}
             </div>
           </div>
-          <article className="leetcode-panel" aria-label="LeetCode statistics live panel">
+          <article className="leetcode-panel" aria-label="LeetCode statistics panel">
             <div className="leetcode-head">
               <div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
                   <h3>LeetCode Practice</h3>
-                  {stats.isLive && (
-                    <span className="pill" style={{ padding: '2px 8px', fontSize: '10px', display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
-                      <span className="status-dot" style={{ width: '5px', height: '5px' }} /> Live
+
+                  {/* Status badge */}
+                  {stats.isLive ? (
+                    <span
+                      className="pill"
+                      title="Statistics fetched live from LeetCode"
+                      style={{ padding: '2px 8px', fontSize: '10px', display: 'inline-flex', alignItems: 'center', gap: '4px' }}
+                    >
+                      <span className="status-dot" style={{ width: '5px', height: '5px' }} />
+                      Live
+                    </span>
+                  ) : (
+                    <span
+                      style={{
+                        padding: '2px 8px',
+                        fontSize: '10px',
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: '4px',
+                        background: 'rgba(234, 179, 8, 0.12)',
+                        border: '1px solid rgba(234, 179, 8, 0.35)',
+                        borderRadius: '999px',
+                        color: '#eab308',
+                      }}
+                      title={isHistorical ? 'Showing verified historical snapshot — live sync unavailable' : 'Cached'}
+                    >
+                      <Clock size={9} />
+                      {isHistorical ? 'Historical' : 'Cached'}
                     </span>
                   )}
                 </div>
+
                 <p style={{ display: 'flex', alignItems: 'center', gap: '6px', marginTop: '4px' }}>
-                  <span>{stats.lastUpdated}</span>
+                  <span style={{ fontSize: '11px', color: '#8898aa' }}>{stats.lastUpdated}</span>
                   <button
                     onClick={() => refresh()}
                     disabled={isLoading}
-                    title="Refresh live LeetCode stats"
+                    title="Refresh LeetCode stats"
                     style={{
                       background: 'none',
                       border: 'none',
@@ -76,16 +110,22 @@ export function CodingProfiles() {
                       fontSize: '10px',
                       transition: 'color 0.2s',
                     }}
-                    className="hover:text-cyan-400"
                     aria-label="Refresh LeetCode statistics"
                   >
                     <RotateCw size={11} className={isLoading ? 'animate-spin' : ''} />
-                    <span>{isLoading ? 'Syncing...' : 'Refresh'}</span>
+                    <span>{isLoading ? 'Syncing…' : 'Refresh'}</span>
                   </button>
                 </p>
+
                 {error && (
                   <p style={{ color: '#eab308', fontSize: '10px', marginTop: '2px' }}>
                     {error}
+                  </p>
+                )}
+
+                {isHistorical && !error && (
+                  <p style={{ color: '#8898aa', fontSize: '10px', marginTop: '2px' }}>
+                    Showing verified historical snapshot. Live sync will update automatically.
                   </p>
                 )}
               </div>
@@ -94,6 +134,7 @@ export function CodingProfiles() {
                 <small>problems solved</small>
               </div>
             </div>
+
             <div className="stat-grid">
               {statItems.map(([value, label]) => (
                 <div className="stat-cell" key={label}>
@@ -102,10 +143,16 @@ export function CodingProfiles() {
                 </div>
               ))}
             </div>
+
             <div className="leetcode-foot">
-              <span>{stats.contestsAttended} contest attended</span>
-              <span>{stats.streak} maximum streak</span>
-              <span>{stats.badgesCount} badges · {stats.badgeNote}</span>
+              <span>
+                {stats.contestsAttended !== null ? stats.contestsAttended : '—'} contest{stats.contestsAttended !== 1 ? 's' : ''} attended
+              </span>
+              <span>{fmt(stats.streak)} {stats.streak !== null ? 'streak' : '(streak unavailable)'}</span>
+              <span>
+                {stats.badgesCount !== null ? `${stats.badgesCount} badge${stats.badgesCount !== 1 ? 's' : ''}` : '— badges'}
+                {stats.badgeNote ? ` · ${stats.badgeNote}` : ''}
+              </span>
             </div>
           </article>
         </div>

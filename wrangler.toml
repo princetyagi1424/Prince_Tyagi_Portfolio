@@ -1,0 +1,11 @@
+# Cloudflare Pages configuration for Prince Tyagi Portfolio
+# Deploy with: npx wrangler pages deploy artifacts/prince-tyagi-portfolio/dist/public
+# Or connect the GitHub repo in the Cloudflare Pages dashboard.
+
+name = "prince-tyagi-portfolio"
+compatibility_date = "2024-09-23"
+compatibility_flags = ["nodejs_compat"]
+pages_build_output_dir = "artifacts/prince-tyagi-portfolio/dist/public"
+
+[build]
+command = "pnpm --filter @workspace/prince-tyagi-portfolio run build"

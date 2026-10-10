@@ -7,51 +7,58 @@ export interface LeetCodeStats {
   easySolved: number;
   mediumSolved: number;
   hardSolved: number;
-  contestRating: number | string;
-  contestsAttended: number;
-  streak: number | string;
-  badgesCount: number;
-  badgeNote: string;
+  contestRating: number | string | null;
+  contestsAttended: number | null;
+  streak: number | string | null;
+  badgesCount: number | null;
+  badgeNote: string | null;
   lastUpdated: string;
   isLive: boolean;
   isStale?: boolean;
 }
 
-const STORAGE_KEY = 'pt_leetcode_stats_v2';
+/** Verified historical snapshot — never presented as live. */
+const HISTORICAL_SNAPSHOT: LeetCodeStats = {
+  username: 'princeytyagi',
+  totalSolved: 261,
+  easySolved: 203,
+  mediumSolved: 52,
+  hardSolved: 6,
+  contestRating: 1480,
+  contestsAttended: 1,
+  streak: '46 days',
+  badgesCount: 2,
+  badgeNote: '100 Days Badge 2026, 50 Days Badge 2026',
+  lastUpdated: portfolio.leetcode.lastReported, // 'Historical verified snapshot (11 Oct 2026)'
+  isLive: false,
+  isStale: true,
+};
+
+const STORAGE_KEY = 'pt_leetcode_stats_v3';
 const REFRESH_INTERVAL_MS = 5 * 60 * 1000; // 5 minutes
+
+/** Parse cached localStorage value. Returns null if invalid or stale format. */
+function loadCached(): LeetCodeStats | null {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return null;
+    const parsed = JSON.parse(raw);
+    if (parsed && typeof parsed.totalSolved === 'number') {
+      return {
+        ...parsed,
+        isLive: Boolean(parsed.isLive),
+      };
+    }
+  } catch {
+    // ignore parse errors
+  }
+  return null;
+}
 
 export function useLeetCodeStats() {
   const [stats, setStats] = useState<LeetCodeStats>(() => {
-    try {
-      const cached = localStorage.getItem(STORAGE_KEY);
-      if (cached) {
-        const parsed = JSON.parse(cached);
-        if (parsed && typeof parsed.totalSolved === 'number') {
-          return {
-            ...parsed,
-            isLive: Boolean(parsed.isLive),
-          };
-        }
-      }
-    } catch {
-      // ignore
-    }
-
-    // Default verified initial values
-    return {
-      username: 'princeytyagi',
-      totalSolved: 260,
-      easySolved: 202,
-      mediumSolved: 52,
-      hardSolved: 6,
-      contestRating: portfolio.leetcode.rating || '1,480',
-      contestsAttended: Number(portfolio.leetcode.contests) || 1,
-      streak: '46 days',
-      badgesCount: 2,
-      badgeNote: '100 Days Badge 2026, 50 Days Badge 2026',
-      lastUpdated: 'Verified live sync',
-      isLive: true,
-    };
+    const cached = loadCached();
+    return cached ?? HISTORICAL_SNAPSHOT;
   });
 
   const [isLoading, setIsLoading] = useState(false);
@@ -66,36 +73,64 @@ export function useLeetCodeStats() {
     setError(null);
 
     try {
-      let data: any = null;
+      let liveData: LeetCodeStats | null = null;
 
-      // 1. Try same-origin Cloudflare Pages Function or backend /api/leetcode/stats
+      // ── 1. Same-origin Cloudflare Pages Function (production) ──────────────
+      //       or Vite proxy to local API server (development)
       try {
         const res = await fetch('/api/leetcode/stats', {
           headers: { Accept: 'application/json' },
+          signal: AbortSignal.timeout(6000),
         });
+
         if (res.ok) {
           const json = await res.json();
-          if (json && json.totalSolved) {
-            data = json;
-          }
-        } else {
-          // Fallback to /api/leetcode if /api/leetcode/stats returned 404
-          const fallbackRes = await fetch('/api/leetcode', {
-            headers: { Accept: 'application/json' },
-          });
-          if (fallbackRes.ok) {
-            const fallbackJson = await fallbackRes.json();
-            if (fallbackJson && fallbackJson.totalSolved) {
-              data = fallbackJson;
-            }
+          // Accept only a response that carries actual solved counts AND is marked live
+          if (json && typeof json.totalSolved === 'number' && json.isLive === true) {
+            const timeStr = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            const dateStr = new Date().toLocaleDateString([], { day: 'numeric', month: 'short' });
+            liveData = {
+              username: json.username || 'princeytyagi',
+              totalSolved: json.totalSolved,
+              easySolved: typeof json.easySolved === 'number' ? json.easySolved : null,
+              mediumSolved: typeof json.mediumSolved === 'number' ? json.mediumSolved : null,
+              hardSolved: typeof json.hardSolved === 'number' ? json.hardSolved : null,
+              contestRating: json.contestRating ?? null,
+              contestsAttended: json.contestsAttended ?? null,
+              streak: json.streak ?? null,
+              badgesCount: json.badgesCount ?? null,
+              badgeNote: json.badgeNote ?? null,
+              lastUpdated: `Live · ${dateStr}, ${timeStr}`,
+              isLive: true,
+              isStale: false,
+            };
+          } else if (json && json.isLive === false && typeof json.totalSolved === 'number') {
+            // Server returned its own verified fallback — respect it, mark as stale
+            setStats({
+              username: json.username || 'princeytyagi',
+              totalSolved: json.totalSolved,
+              easySolved: json.easySolved ?? null,
+              mediumSolved: json.mediumSolved ?? null,
+              hardSolved: json.hardSolved ?? null,
+              contestRating: json.contestRating ?? null,
+              contestsAttended: json.contestsAttended ?? null,
+              streak: json.streak ?? null,
+              badgesCount: json.badgesCount ?? null,
+              badgeNote: json.badgeNote ?? null,
+              lastUpdated: json.lastReported || portfolio.leetcode.lastReported,
+              isLive: false,
+              isStale: true,
+            });
+            if (isManual) setError('Live sync unavailable · Showing verified historical data');
+            return; // done — don't try public APIs; server already tried them
           }
         }
       } catch {
-        // Local backend not reachable in static or standalone mode
+        // /api not reachable (static mode or offline) — fall through to public APIs
       }
 
-      // 2. Try reliable public CORS endpoints
-      if (!data) {
+      // ── 2. Public CORS proxy (client-side fallback, no server required) ────
+      if (!liveData) {
         const publicEndpoints = [
           'https://alfa-leetcode-api.onrender.com/userProfile/princeytyagi',
           'https://leetcode-stats-api.herokuapp.com/princeytyagi',
@@ -103,104 +138,101 @@ export function useLeetCodeStats() {
 
         for (const url of publicEndpoints) {
           try {
-            const controller = new AbortController();
-            const timeout = setTimeout(() => controller.abort(), 4500);
-            const res = await fetch(url, { signal: controller.signal });
-            clearTimeout(timeout);
+            const res = await fetch(url, {
+              headers: { Accept: 'application/json' },
+              signal: AbortSignal.timeout(5000),
+            });
 
-            if (res.ok) {
-              const resJson = await res.json();
-              if (resJson && (resJson.totalSolved || resJson.easySolved)) {
-                data = {
-                  username: 'princeytyagi',
-                  totalSolved: resJson.totalSolved || (resJson.easySolved + resJson.mediumSolved + resJson.hardSolved),
-                  easySolved: resJson.easySolved || 202,
-                  mediumSolved: resJson.mediumSolved || 52,
-                  hardSolved: resJson.hardSolved || 6,
-                  contestRating: resJson.rating ? Math.round(resJson.rating) : '1,480',
-                  contestsAttended: 1,
-                  streak: '46 days',
-                  badgesCount: 2,
-                  badgeNote: '100 Days Badge 2026, 50 Days Badge 2026',
-                  isLive: true,
-                };
-                break;
-              }
-            }
+            if (!res.ok) continue;
+            const data = await res.json();
+
+            const total = typeof data.totalSolved === 'number' ? data.totalSolved : null;
+            const easy = typeof data.easySolved === 'number' ? data.easySolved : null;
+            const medium = typeof data.mediumSolved === 'number' ? data.mediumSolved : null;
+            const hard = typeof data.hardSolved === 'number' ? data.hardSolved : null;
+
+            if (total === null && easy === null) continue; // reject unusable response
+
+            const timeStr = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            const dateStr = new Date().toLocaleDateString([], { day: 'numeric', month: 'short' });
+
+            liveData = {
+              username: 'princeytyagi',
+              totalSolved: total ?? (easy ?? 0) + (medium ?? 0) + (hard ?? 0),
+              easySolved: easy,
+              mediumSolved: medium,
+              hardSolved: hard,
+              // Only values actually present in the upstream response:
+              contestRating: typeof data.rating === 'number' ? Math.round(data.rating) : null,
+              contestsAttended: null,   // proxy doesn't return this
+              streak: null,             // proxy doesn't return this reliably
+              badgesCount: null,        // proxy doesn't return this
+              badgeNote: null,          // proxy doesn't return this
+              lastUpdated: `Live (proxy) · ${dateStr}, ${timeStr}`,
+              isLive: true,
+              isStale: false,
+            };
+            break;
           } catch {
-            // next endpoint
+            // try next endpoint
           }
         }
       }
 
-      if (data && (data.totalSolved || data.easySolved)) {
-        const timeStr = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-        const dateStr = new Date().toLocaleDateString([], { day: 'numeric', month: 'short' });
-        const newStats: LeetCodeStats = {
-          username: data.username || 'princeytyagi',
-          totalSolved: data.totalSolved || 260,
-          easySolved: data.easySolved || 202,
-          mediumSolved: data.mediumSolved || 52,
-          hardSolved: data.hardSolved || 6,
-          contestRating: typeof data.contestRating === 'number' ? data.contestRating.toLocaleString() : (data.contestRating || '1,480'),
-          contestsAttended: data.contestsAttended ?? 1,
-          streak: typeof data.streak === 'number' ? `${data.streak} days` : (data.streak || '46 days'),
-          badgesCount: data.badgesCount || 2,
-          badgeNote: data.badgeNote || '100 Days Badge 2026, 50 Days Badge 2026',
-          lastUpdated: `Live sync · ${dateStr}, ${timeStr}`,
-          isLive: true,
-          isStale: false,
-        };
-
-        setStats(newStats);
+      // ── 3. Commit or fall back to historical snapshot ────────────────────
+      if (liveData) {
+        setStats(liveData);
         setLastRefreshedAt(new Date());
         try {
-          localStorage.setItem(STORAGE_KEY, JSON.stringify(newStats));
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(liveData));
         } catch {
-          // ignore
+          // ignore quota errors
         }
       } else {
+        // No live source responded — keep whatever we already have displayed,
+        // just mark it stale.
         setStats((prev) => ({
           ...prev,
+          isLive: false,
           isStale: true,
-          lastUpdated: prev.isLive ? `${prev.lastUpdated} (cached)` : portfolio.leetcode.lastReported,
+          lastUpdated:
+            prev.isLive
+              ? `${prev.lastUpdated} (cached)`
+              : portfolio.leetcode.lastReported,
         }));
         if (isManual) {
-          setError('Live sync temporarily slow · Showing verified data');
+          setError('Live sync temporarily unavailable · Showing last known data');
         }
       }
     } catch {
-      setError('Could not connect to live statistics · Retaining cached data');
+      setError('Could not reach statistics servers · Retaining cached data');
     } finally {
       setIsLoading(false);
       isFetchingRef.current = false;
     }
   }, []);
 
+  // Fetch on mount
   useEffect(() => {
     fetchStats(false);
   }, [fetchStats]);
 
+  // Refresh every 5 minutes while the tab is visible
   useEffect(() => {
     const interval = setInterval(() => {
-      if (!document.hidden) {
-        fetchStats(false);
-      }
+      if (!document.hidden) fetchStats(false);
     }, REFRESH_INTERVAL_MS);
     return () => clearInterval(interval);
   }, [fetchStats]);
 
+  // Refresh when the tab regains focus / becomes visible
   useEffect(() => {
-    const handleVisibility = () => {
-      if (!document.hidden) {
-        fetchStats(false);
-      }
-    };
-    window.addEventListener('visibilitychange', handleVisibility);
-    window.addEventListener('focus', handleVisibility);
+    const handler = () => { if (!document.hidden) fetchStats(false); };
+    window.addEventListener('visibilitychange', handler);
+    window.addEventListener('focus', handler);
     return () => {
-      window.removeEventListener('visibilitychange', handleVisibility);
-      window.removeEventListener('focus', handleVisibility);
+      window.removeEventListener('visibilitychange', handler);
+      window.removeEventListener('focus', handler);
     };
   }, [fetchStats]);
 

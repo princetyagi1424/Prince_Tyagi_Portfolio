@@ -1,19 +1,19 @@
 /**
  * Cloudflare Pages Function: /api/leetcode/stats
  * Fetches and normalizes live public LeetCode statistics for 'princeytyagi'.
- * Supports edge caching, timeout handling, and resilient upstream fallbacks.
+ * Strict isolation: Never mixes fallback data into live-marked responses.
  */
 
 interface Env {
-  // Cloudflare Pages environment variables/bindings if configured
+  // Cloudflare Pages environment variables if configured
 }
 
 const LEETCODE_USERNAME = "princeytyagi";
 
 const FALLBACK_DATA = {
   username: LEETCODE_USERNAME,
-  totalSolved: 260,
-  easySolved: 202,
+  totalSolved: 261,
+  easySolved: 203,
   mediumSolved: 52,
   hardSolved: 6,
   contestRating: 1480,
@@ -23,9 +23,10 @@ const FALLBACK_DATA = {
   streak: 46,
   badgesCount: 2,
   badgeNote: "100 Days Badge 2026, 50 Days Badge 2026",
-  lastReported: "Verified snapshot",
+  lastReported: "Historical verified snapshot (11 Oct 2026)",
   isLive: false,
-  fetchedAt: new Date().toISOString(),
+  stale: true,
+  verifiedAt: "2026-10-11T00:00:00.000Z",
 };
 
 async function fetchFromGraphQL(username: string) {
@@ -79,7 +80,7 @@ async function fetchFromGraphQL(username: string) {
     clearTimeout(timeout);
 
     if (!response.ok) {
-      throw new Error(`LeetCode GraphQL status: ${response.status}`);
+      throw new Error(`LeetCode GraphQL HTTP status ${response.status}`);
     }
 
     const result = (await response.json()) as any;
@@ -91,10 +92,10 @@ async function fetchFromGraphQL(username: string) {
     const acStats = user.submitStatsGlobal?.acSubmissionNum || [];
     const contest = result.data.userContestRanking;
 
-    let totalSolved = 0;
-    let easySolved = 0;
-    let mediumSolved = 0;
-    let hardSolved = 0;
+    let totalSolved: number | null = null;
+    let easySolved: number | null = null;
+    let mediumSolved: number | null = null;
+    let hardSolved: number | null = null;
 
     for (const item of acStats) {
       if (item.difficulty === "All") totalSolved = item.count;
@@ -103,26 +104,35 @@ async function fetchFromGraphQL(username: string) {
       else if (item.difficulty === "Hard") hardSolved = item.count;
     }
 
+    if (totalSolved === null && (easySolved !== null || mediumSolved !== null || hardSolved !== null)) {
+      totalSolved = (easySolved || 0) + (mediumSolved || 0) + (hardSolved || 0);
+    }
+
+    if (totalSolved === null) {
+      throw new Error("Unable to parse solved question counts from response");
+    }
+
     const badges = user.badges || [];
-    const streak = user.userCalendar?.streak || FALLBACK_DATA.streak;
-    const rating = contest?.rating ? Math.round(contest.rating) : FALLBACK_DATA.contestRating;
-    const contests = contest?.attendedContestsCount ?? FALLBACK_DATA.contestsAttended;
+    const streak = typeof user.userCalendar?.streak === "number" ? user.userCalendar.streak : null;
+    const rating = contest?.rating ? Math.round(contest.rating) : null;
+    const contests = typeof contest?.attendedContestsCount === "number" ? contest.attendedContestsCount : null;
 
     return {
       username,
-      totalSolved: totalSolved || FALLBACK_DATA.totalSolved,
-      easySolved: easySolved || FALLBACK_DATA.easySolved,
-      mediumSolved: mediumSolved || FALLBACK_DATA.mediumSolved,
-      hardSolved: hardSolved || FALLBACK_DATA.hardSolved,
+      totalSolved,
+      easySolved: easySolved ?? 0,
+      mediumSolved: mediumSolved ?? 0,
+      hardSolved: hardSolved ?? 0,
       contestRating: rating,
       contestsAttended: contests,
       globalRanking: contest?.globalRanking || null,
       topPercentage: contest?.topPercentage || null,
       streak,
-      badgesCount: badges.length || FALLBACK_DATA.badgesCount,
-      badgeNote: badges.length > 0 ? badges.map((b: any) => b.displayName).slice(0, 2).join(", ") : FALLBACK_DATA.badgeNote,
+      badgesCount: badges.length,
+      badgeNote: badges.length > 0 ? badges.map((b: any) => b.displayName).slice(0, 2).join(", ") : null,
       lastReported: "Live via LeetCode GraphQL",
       isLive: true,
+      stale: false,
       cached: false,
       fetchedAt: new Date().toISOString(),
     };
@@ -145,29 +155,35 @@ async function fetchFromPublicProxy(username: string) {
     clearTimeout(timeout);
 
     if (!response.ok) {
-      throw new Error(`Public proxy status: ${response.status}`);
+      throw new Error(`Public proxy HTTP status ${response.status}`);
     }
 
     const data = (await response.json()) as any;
     if (!data || typeof data.totalSolved !== "number") {
-      throw new Error("Invalid proxy response");
+      throw new Error("Invalid proxy response format");
     }
+
+    const easy = typeof data.easySolved === "number" ? data.easySolved : 0;
+    const medium = typeof data.mediumSolved === "number" ? data.mediumSolved : 0;
+    const hard = typeof data.hardSolved === "number" ? data.hardSolved : 0;
+    const total = data.totalSolved || (easy + medium + hard);
 
     return {
       username,
-      totalSolved: data.totalSolved || (data.easySolved + data.mediumSolved + data.hardSolved) || FALLBACK_DATA.totalSolved,
-      easySolved: data.easySolved ?? FALLBACK_DATA.easySolved,
-      mediumSolved: data.mediumSolved ?? FALLBACK_DATA.mediumSolved,
-      hardSolved: data.hardSolved ?? FALLBACK_DATA.hardSolved,
-      contestRating: data.rating ? Math.round(data.rating) : FALLBACK_DATA.contestRating,
-      contestsAttended: FALLBACK_DATA.contestsAttended,
+      totalSolved: total,
+      easySolved: easy,
+      mediumSolved: medium,
+      hardSolved: hard,
+      contestRating: data.rating ? Math.round(data.rating) : null,
+      contestsAttended: null,
       globalRanking: data.ranking || null,
       topPercentage: null,
-      streak: FALLBACK_DATA.streak,
-      badgesCount: FALLBACK_DATA.badgesCount,
-      badgeNote: FALLBACK_DATA.badgeNote,
+      streak: null,
+      badgesCount: null,
+      badgeNote: null,
       lastReported: "Live via Public LeetCode Proxy",
       isLive: true,
+      stale: false,
       cached: false,
       fetchedAt: new Date().toISOString(),
     };
@@ -210,12 +226,13 @@ export async function onRequestGet(context: { request: Request; env: Env }): Pro
       });
     }
 
-    // Return verified fallback snapshot if both external APIs are unreachable
+    // Return verified historical fallback snapshot if both external APIs fail
     return new Response(
       JSON.stringify({
         ...FALLBACK_DATA,
+        isLive: false,
         stale: true,
-        error: "Upstream LeetCode endpoints temporarily unreachable; returning verified snapshot.",
+        error: "Upstream LeetCode endpoints temporarily unreachable; serving verified historical snapshot.",
       }),
       {
         status: 200,
@@ -229,8 +246,9 @@ export async function onRequestGet(context: { request: Request; env: Env }): Pro
     return new Response(
       JSON.stringify({
         ...FALLBACK_DATA,
+        isLive: false,
         stale: true,
-        error: err?.message || "Internal server error",
+        error: err?.message || "Internal server error; serving verified historical snapshot.",
       }),
       {
         status: 200,
@@ -255,5 +273,4 @@ export async function onRequestOptions(): Promise<Response> {
   });
 }
 
-// Default export for all requests
 export const onRequest = onRequestGet;
