@@ -133,7 +133,7 @@ async function fetchLeetCodeStats(username: string) {
   }
 }
 
-router.get("/leetcode", async (_req, res) => {
+const handleStats = async (_req: any, res: any) => {
   const now = Date.now();
   if (cache && now - cache.timestamp < CACHE_TTL_MS) {
     return res.json({
@@ -169,6 +169,9 @@ router.get("/leetcode", async (_req, res) => {
       error: "Serving verified base data",
     });
   }
-});
+};
+
+router.get("/leetcode", handleStats);
+router.get("/leetcode/stats", handleStats);
 
 export default router;

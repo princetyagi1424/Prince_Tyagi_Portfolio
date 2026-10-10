@@ -68,9 +68,9 @@ export function useLeetCodeStats() {
     try {
       let data: any = null;
 
-      // 1. Try local backend /api/leetcode
+      // 1. Try same-origin Cloudflare Pages Function or backend /api/leetcode/stats
       try {
-        const res = await fetch('/api/leetcode', {
+        const res = await fetch('/api/leetcode/stats', {
           headers: { Accept: 'application/json' },
         });
         if (res.ok) {
@@ -78,9 +78,20 @@ export function useLeetCodeStats() {
           if (json && json.totalSolved) {
             data = json;
           }
+        } else {
+          // Fallback to /api/leetcode if /api/leetcode/stats returned 404
+          const fallbackRes = await fetch('/api/leetcode', {
+            headers: { Accept: 'application/json' },
+          });
+          if (fallbackRes.ok) {
+            const fallbackJson = await fallbackRes.json();
+            if (fallbackJson && fallbackJson.totalSolved) {
+              data = fallbackJson;
+            }
+          }
         }
       } catch {
-        // Local backend not reachable in static or vite standalone
+        // Local backend not reachable in static or standalone mode
       }
 
       // 2. Try reliable public CORS endpoints
