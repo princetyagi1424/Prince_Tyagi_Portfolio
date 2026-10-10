@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "Prince Tyagi Portfolio"
+description = "A personal developer portfolio for Prince Tyagi featuring verified projects, technical skills, education, certificates, coding profiles, and contact details."
+version = "1.0.0"
+id = "artifacts/prince-tyagi-portfolio"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 18209
+
+[services.development]
+run = "pnpm --filter @workspace/prince-tyagi-portfolio run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/prince-tyagi-portfolio", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/prince-tyagi-portfolio/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "18209"
+BASE_PATH = "/"

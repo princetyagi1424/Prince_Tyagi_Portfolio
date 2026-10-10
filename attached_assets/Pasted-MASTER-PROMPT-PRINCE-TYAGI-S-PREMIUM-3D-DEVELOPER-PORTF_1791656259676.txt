@@ -1,0 +1,737 @@
+MASTER PROMPT — PRINCE TYAGI’S PREMIUM 3D DEVELOPER PORTFOLIO
+
+**Target platform: Replit Agent**
+
+## ROLE AND MISSION
+
+Act as a world-class creative developer, senior frontend engineer, 3D web specialist, UI/UX designer, accessibility engineer, and QA engineer.
+
+Build a complete, polished, production-quality personal portfolio website for Prince Tyagi. This is an implementation task: create the actual working website, not merely a design mockup, wireframe, screenshot, or plan.
+
+Use the verified profile and project information below. Do not invent experience, awards, project metrics, skills, working features, links, or achievements. Where a detail is unknown, keep it editable in a central content file and either omit it from the visible UI or label it honestly.
+
+The result should feel like a custom-designed, premium 3D developer portfolio that would be credible for a Computer Science student applying to software engineering internships and early-career roles at Google and other technology companies. It must remain fast, readable, accessible, responsive, and usable on lower-powered devices.
+
+---
+
+## 1. VERIFIED PERSONAL PROFILE
+
+- **Full name:** Prince Tyagi
+- **Professional title:** Computer Science Engineering Student | Aspiring Software Developer
+- **University:** GLA University, Mathura, Uttar Pradesh, India
+- **Degree:** B.Tech in Computer Science Engineering (AI & Data Science / CSE AI & DS)
+- **Current year:** 2nd year, as supplied on 10 October 2026
+- **Degree start year:** 2025
+- **Expected graduation:** 2029
+- **Current overall CGPA:** 7.76/10
+- **Location:** Mathura, Uttar Pradesh, India
+- **Email:** princetyagi3726@gmail.com
+- **Phone:** +91 9058333615
+
+### Professional profiles
+
+Use these exact URLs:
+
+- GitHub: https://github.com/princetyagi1424
+- LinkedIn: https://www.linkedin.com/in/prince-tyagi-2147482aa/
+- LeetCode: https://leetcode.com/u/princeytyagi/
+- HackerRank: https://www.hackerrank.com/profile/princetyagi3726
+
+### School education
+
+- Class XII: 63.4%, UP Board
+- Class X: 79%, UP Board
+- School for both: S.K.R. Inter College
+
+Show school scores as secondary education details, not as the visual focus. Put education and personal details in a central data/config file so they can be changed later. Do not display private home-address details; city and state are sufficient.
+
+### Languages for communication
+
+- Hindi
+- English — Intermediate
+
+### Authentic short bio
+
+Use this introduction, polishing the grammar if needed but not adding invented claims:
+
+“I'm a second-year B.Tech CSE (AI & Data Science) student at GLA University, Mathura, working toward becoming a strong software developer. I primarily practise Java and data structures and algorithms, and I’m building practical experience through programming projects, Python-based computer-vision work, and continuous coding practice. I enjoy learning by building, testing, debugging, and improving software.”
+
+Do not call Prince an experienced engineer, AI researcher, Google employee, official Google Student Ambassador, or professional software engineer. Do not add a career objective full of generic buzzwords.
+
+Keep all portfolio copy professional, confident, student-appropriate, and written in clear English.
+
+---
+
+## 2. VERIFIED TECHNICAL SKILLS
+
+### Programming
+
+- Java — primary programming language
+- C — intermediate knowledge as reported by the owner, including variables, conditions, loops, functions, arrays, strings, pointers, and structures
+- Python — foundational knowledge: variables, loops, functions, lists, dictionaries, NumPy, and Pandas
+
+### Data Structures and Algorithms
+
+- Arrays
+- Strings
+- Sorting
+- Binary search
+- Sliding window
+- Linked lists
+- Recursion
+- Time and space complexity analysis
+- Object-oriented programming (OOP)
+- Java Collections Framework topics: ArrayList, HashMap, HashSet, LinkedList
+
+The owner reports being able to calculate time and space complexity for code.
+
+### Web
+
+- HTML — basic
+- CSS — basic
+- JavaScript — basic; able to create a simple website
+
+### Databases
+
+- MongoDB
+- Creating databases and collections
+- CRUD operations
+- Connecting MongoDB Atlas
+
+Do not list SQL or MySQL as a skill. The owner has not learned SQL yet.
+
+### Computer science foundations
+
+- Operating systems — basic knowledge
+- Computer networks — basic knowledge
+
+### Developer tools and workflow
+
+- Git and GitHub: cloning repositories, committing and pushing changes, creating and switching branches
+- Visual Studio Code
+- IntelliJ IDEA
+- Google Colab
+- OpenCV and a YOLO-based approach have been used in the Fire & Smoke Detection project. The exact YOLO version is unknown.
+
+### Skills not yet confirmed
+
+Do not display these as personal skills:
+
+- React, Node.js, Express, REST API development
+- SQL
+- Formal machine-learning algorithms
+- Tree and graph algorithms
+- Stack and queue
+- Java exception handling, file handling, and multithreading
+
+Using React or Three.js to build this portfolio does not automatically mean the owner has prior professional React experience.
+
+Present skills as grouped cards, tags, or interactive chips. Do not invent proficiency percentages, fake progress bars, “100% expert” labels, or comparative ratings.
+
+Use labels such as “Primary language” or “Foundational” only where useful and truthful.
+
+---
+
+## 3. PROJECTS — VERIFIED INFORMATION ONLY
+
+### Project A: AI-Based Fire & Smoke Detection System
+
+**Confirmed technology stack:**
+
+- Python
+- OpenCV
+- YOLO-based AI detection; exact version unknown
+
+**Features the owner reports are implemented and tested:**
+
+- Live webcam-based fire and smoke detection
+- Image upload and detection
+- Alarm/alert functionality
+- Email notifications that include detected images
+
+**Testing and implementation details:**
+
+- The owner reports testing live webcam detection and sample images obtained online. Sample videos were also used as testing material.
+- The application does not currently support uploading a video file and processing it as an input mode.
+- No detection-accuracy figures, test counts, benchmark results, or false-positive measurements were recorded. Do not invent performance numbers.
+- The project currently runs locally on the owner's laptop.
+- It has not been uploaded to GitHub and has no confirmed live demo URL.
+- The owner used tutorials and online resources while building it and says they understand the code.
+- Do not imply that the owner invented the model or trained it from scratch.
+- Do not claim Arduino, physical IoT sensors, hardware deployment, cloud monitoring, or production-grade fire safety unless the owner later confirms these.
+
+Use this honest description:
+
+“A Python-based fire and smoke detection prototype using OpenCV and a YOLO-based detection approach. It supports live webcam detection and image-upload detection, with alarm and email alerts that include detected images. The project has been tested locally; quantitative detection metrics and public deployment are not yet available.”
+
+Add a subtle note on its project detail view:
+
+“Prototype / educational project — not a certified fire-safety system.”
+
+Do not provide real-world fire-safety assurances.
+
+### Project B: Chess Game
+
+**Confirmed technologies actually used in the game:**
+
+- HTML
+- CSS
+- JavaScript
+- An external chess library is used for chess rules and move logic; its exact name has not been confirmed.
+- Java was used for programming practice, not as part of this Chess Game.
+
+**Features the owner reports are working:**
+
+- Chessboard UI and piece movement
+- Legal-move validation
+- Check and checkmate handling
+- Castling
+- Two-player mode
+- Play against a computer opponent
+- Restart game
+
+**Additional facts:**
+
+- The game runs locally on the owner's laptop.
+- It has not been uploaded to GitHub and has no confirmed live demo URL.
+- The owner used tutorials and online resources and says they understand the code.
+- The computer opponent's move-selection method is unknown.
+
+Do not claim Minimax, Alpha-Beta Pruning, engine integration, or a sophisticated AI algorithm unless later verified.
+
+Use this honest description:
+
+“A browser-based chess game built with HTML, CSS, and JavaScript, using a chess rules library for move validation. Features include legal moves, check/checkmate, castling, two-player play, a computer-opponent mode, and restart functionality.”
+
+If the computer-opponent algorithm is discussed, state that its internal strategy has not been documented or verified yet.
+
+### Project C: Java DSA and Coding Practice
+
+Use the real public repositories below. The owner confirms that all three repositories are public and have README files.
+
+1. LeetCode-Questions-Soln  
+   https://github.com/princetyagi1424/Leatcode-Questions-Soln
+
+2. BridgeLabz Training Year 1  
+   https://github.com/princetyagi1424/Bridgelabz-Training-1Y
+
+3. BridgeLabz Training Year 2  
+   https://github.com/princetyagi1424/BridgelabzTraining2Y
+
+Describe these repositories as an ongoing coding practice and DSA collection, not as a polished commercial product.
+
+Mention arrays, strings, sorting, binary search, and sliding window where they are relevant to the submitted code.
+
+Use the supplied LeetCode repository URL exactly unless the owner later changes it.
+
+### Project link rules
+
+- Fire Detection and Chess Game have no public source repositories or live demos yet.
+- Do not invent links or create buttons that go nowhere.
+- Their cards may show a small, non-clickable status label: “Local project — repository/demo not published yet.”
+- Provide real repository buttons for Java DSA practice.
+- Make all project descriptions and destinations editable in a single configuration file.
+- Do not add GyanDrishti.
+- Do not invent project screenshots. If no real screenshots are available, use original CSS/3D-inspired visuals or abstract illustrations. Do not present artwork as a real screenshot of the app.
+
+---
+
+## 4. CODING PROFILES AND STATISTICS
+
+The owner's LeetCode screenshot, shared on 10 October 2026, shows:
+
+- Username: princeytyagi
+- Problems solved: 259
+- Easy: 202
+- Medium: 51
+- Hard: 6
+- Contest rating: 1,480
+- Contests attended: 1
+- Maximum streak: 45 days
+- Badges: 2, including “100 Days Badge 2026”
+
+These are snapshot values, not live API data.
+
+If displayed, label them “Last reported: 10 Oct 2026” or put them in an editable central config object. Do not claim the values are live.
+
+Do not create a live-statistics fetcher that does not work. Make the values straightforward to update manually.
+
+**HackerRank profile:**  
+https://www.hackerrank.com/profile/princetyagi3726
+
+No HackerRank score or badges were supplied beyond the certificate below. Do not invent any.
+
+Keep coding profile content professional rather than building a large gamified dashboard.
+
+---
+
+## 5. CERTIFICATES AND PROFESSIONAL DEVELOPMENT
+
+Create a clean “Certificates & Professional Development” section. Use accurate names and dates. Use certificate image previews only if the actual image assets are uploaded to the project.
+
+Do not generate fake certificate artwork, credential IDs, verification links, or digital badges.
+
+### 1. HackerRank — Java (Basic)
+
+Certificate of Accomplishment
+
+- Earned: 12 August 2026
+- The owner passed the HackerRank Java (Basic) skill certification test.
+- Profile: https://www.hackerrank.com/profile/princetyagi3726
+
+### 2. Deloitte / Forage — Data Analytics Job Simulation
+
+- Certificate of Completion
+- Date: 28 December 2025
+- Present this as a job simulation, not employment at Deloitte.
+
+### 3. Google Student Ambassador Program 2026 — “Build Your Fest Stall Edition”
+
+- Certificate of Participation
+- Date: 8 October 2026
+- The certificate states that the owner participated in the product trial organised under the Google Student Ambassador Program 2026 and brought a brand idea to life using Gemini and Nano Banana.
+
+Describe this only as participation in the product trial or program activity. Do not state that Prince was selected or appointed as an official Google Student Ambassador or that Google employed him.
+
+### 4. GLA University / Code Busters — “BuildCamp: AI, Scalability & Google Antigravity”
+
+- Organised by the GLA University Department of Computer Engineering & Applications, in association with Code Busters
+- One-day workshop participation certificate
+- Date: 18 September 2026
+
+Present as workshop participation, not a professional AI engineering certification.
+
+### Incoming Internship — Pinnacle Labs
+
+- Offered role: Data Science Intern
+- Mode: Remote
+- Offer-letter duration: one month
+- Joining date: 12 October 2026
+- The owner confirmed acceptance, joining date, and joining instructions.
+- As of 10 October 2026, the internship has not yet started.
+
+Initially show this as:
+
+“Incoming Data Science Intern — Pinnacle Labs”
+
+Include the date and an “Incoming” label unless the owner updates the status after joining.
+
+Do not describe it as completed work experience before the owner actually starts. Do not invent internship tasks, achievements, supervisor names, or company project details.
+
+Put internship status and dates in the central configuration file so the owner can update them.
+
+### Other career facts
+
+- No other work experience reported
+- No hackathon participation reported
+- No open-source contributions reported
+- No leadership or student-club roles reported
+- No awards or scholarships reported
+
+Do not create empty sections for these items, and do not invent content to fill space.
+
+---
+
+## 6. PREMIUM INTERACTIVE 3D DESIGN
+
+Create a custom immersive portfolio that looks intentional and refined. It should not resemble a generic template, a dashboard, or a gaming landing page.
+
+### Art direction
+
+- Dark navy and near-black base
+- Electric blue, cyan, and violet accents
+- Carefully controlled gradients, subtle glows, translucent glass elements, fine borders, layered depth, and thoughtful whitespace
+- Premium typography with a readable modern sans-serif, strong hierarchy, and restrained display typography for the hero
+- High contrast and legible body text
+- Thoughtful motion, pointer/scroll responses, and smooth transitions
+- A consistent design system covering spacing, type scale, radii, shadows, and color tokens
+- A professional appearance that is visually memorable to recruiters
+
+Avoid excessive particles, noisy backgrounds, constant motion, overdone neon, long loading screens, fake terminal rain, unreadable text, excessive glassmorphism, random stock photos, and oversized 3D objects that obscure the content.
+
+### Genuine 3D hero
+
+Use Three.js through React Three Fiber.
+
+Create an interactive abstract digital workspace/orbit featuring some combination of:
+
+- A floating wireframe cube
+- Glass-like geometric forms
+- A subtle blue/cyan particle field
+- Code-inspired shapes
+- A small chess-knight silhouette or grid motif as a subtle personal reference
+
+Keep the scene visually elegant rather than crowded. Use custom materials, lighting, smooth animations, and depth.
+
+The 3D scene must be real interactive geometry, not a static image pretending to be 3D.
+
+### 3D interaction
+
+- On desktop, implement subtle pointer-based parallax or rotation and restrained idle animation.
+- On touchscreens, allow lightweight interaction or gentle camera animation without trapping scrolling.
+- Respect `prefers-reduced-motion`.
+- Lazy-load the heavy 3D scene where practical.
+- Show a beautiful CSS fallback immediately.
+- If WebGL is unavailable, retain a polished fallback and all core content.
+- Reduce particles, pixel ratio, shadows, and animation intensity on lower-powered devices.
+- The website must remain usable if 3D effects are disabled.
+- Never autoplay sound.
+
+---
+
+## 7. REQUIRED WEBSITE SECTIONS
+
+Build a responsive single-page portfolio unless multiple pages offer a clear benefit.
+
+### A. Navigation
+
+- Personal monogram based on “PT” or “Prince Tyagi”
+- Home, About, Skills, Projects, Education, Certificates, Coding Profiles, Contact
+- Smooth scrolling to actual section IDs
+- Active, hover, and focus states
+- Accessible mobile menu with keyboard support and Escape behavior
+- Sticky navigation that does not cover section headings
+
+### B. Hero
+
+Display:
+
+**Prince Tyagi**
+
+Suggested headline:
+
+“Building my path in software engineering, one problem and project at a time.”
+
+Supporting copy should identify him as a B.Tech CSE (AI & DS) student at GLA University, expected graduation 2029, currently focusing on Java, DSA, and practical software projects.
+
+Buttons:
+
+- “Explore Projects” — scrolls to the Projects section
+- “Contact Me” — scrolls to Contact or opens a valid mailto link
+
+Include the actual interactive 3D scene.
+
+Include a subtle scroll indicator.
+
+A “View Resume” button is allowed only if an actual resume PDF is placed at:
+
+`public/Prince_Tyagi_Software_Engineer_Resume.pdf`
+
+If this file is missing, hide the button or show a non-clickable development-only note. Never link to a local sandbox URL.
+
+### C. About
+
+Use the authentic bio from Section 1.
+
+Explain that Prince is learning and building, rather than claiming years of experience.
+
+Highlight his interest areas:
+
+- Java and DSA
+- Practical software development
+- Python/OpenCV computer-vision experimentation
+- Web projects
+
+Keep the copy concise and concrete.
+
+### D. Technical Skills
+
+Create grouped skills cards or interactive clusters.
+
+**Programming:** Java, C, Python  
+**DSA:** Arrays, Strings, Sorting, Binary Search, Sliding Window, Linked Lists, Recursion, Time & Space Complexity  
+**Web:** HTML, CSS, JavaScript  
+**Database:** MongoDB, MongoDB Atlas, CRUD  
+**Tools:** Git, GitHub, VS Code, IntelliJ IDEA, Google Colab  
+**Foundations:** OOP, basic OS concepts, basic networking concepts  
+**Python libraries:** NumPy, Pandas, OpenCV (project use)
+
+Do not show SQL, Node.js, Express, React, or other unconfirmed personal skills.
+
+Do not use fake skill-level percentages. “Currently exploring” labels must be configurable, not automatically populated with unsupported technologies.
+
+### E. Projects
+
+Show three main project cards:
+
+1. AI-Based Fire & Smoke Detection System
+2. Chess Game
+3. Java DSA Practice
+
+Each card should have a refined visual, title, summary, verified technology tags, 2–4 honest feature bullets, and links only where available.
+
+**Fire Detection card:**
+
+- Python, OpenCV, YOLO-based detection
+- Live webcam detection
+- Upload an image and detect fire/smoke
+- Alarm and email alerts with images
+- No numerical accuracy metric
+- Local prototype, not certified fire safety
+- No GitHub/demo link until supplied
+
+**Chess Game card:**
+
+- HTML, CSS, JavaScript, external chess rules library
+- Legal moves, check/checkmate, castling, two-player mode, computer-opponent mode, restart
+- No claims about Minimax or advanced AI
+- No GitHub/demo link until supplied
+
+**Java DSA Practice card:**
+
+- Link to the three actual repositories listed earlier
+- Mention arrays, strings, sorting, binary search, and sliding-window techniques where appropriate
+
+Clicking a project may open an accessible modal/drawer or navigate to project details. Modals must close by keyboard and handle focus correctly.
+
+Do not fabricate live demos or add dead “View Live Demo” buttons.
+
+If source code is not public, show a small status label:
+
+“Local project — public repository/demo not published yet.”
+
+### F. Education
+
+Primary education card:
+
+- B.Tech, Computer Science Engineering (AI & Data Science)
+- GLA University, Mathura
+- 2025–2029 (Expected)
+- Current CGPA: 7.76/10
+
+Secondary details:
+
+- Class XII — S.K.R. Inter College, UP Board, 63.4%
+- Class X — S.K.R. Inter College, UP Board, 79%
+
+Do not label school percentages as CGPA.
+
+### G. Certificates & Professional Development
+
+Include the four credential records from Section 5 with accurate dates and descriptions.
+
+Distinguish a participation certificate, an online job simulation, and a HackerRank skill certification.
+
+Put the incoming internship in a separate “Experience / Upcoming” card, not in the certificate list.
+
+Do not claim official Google Student Ambassador status.
+
+### H. Coding Profiles
+
+Use clean cards or buttons with these exact URLs:
+
+- GitHub — https://github.com/princetyagi1424
+- LeetCode — https://leetcode.com/u/princeytyagi/
+- HackerRank — https://www.hackerrank.com/profile/princetyagi3726
+- LinkedIn — https://www.linkedin.com/in/prince-tyagi-2147482aa/
+
+If LeetCode statistics are shown, use the supplied snapshot with the label “Last reported 10 Oct 2026”:
+
+- 259 solved
+- 202 Easy
+- 51 Medium
+- 6 Hard
+- Rating 1,480
+- 1 contest attended
+- 45-day maximum streak
+- 2 badges, including 100 Days Badge 2026
+
+Keep these values static and editable. Never describe them as live.
+
+### I. Contact
+
+Include:
+
+- Email: princetyagi3726@gmail.com
+- Phone: +91 9058333615
+- Location: Mathura, Uttar Pradesh, India
+- LinkedIn and GitHub
+
+Provide an accessible contact form with name, email, optional subject, and message fields.
+
+No backend or email provider is currently configured. Unless a real backend or service is successfully configured and tested, use a working mailto fallback that opens the visitor’s email client with a prefilled subject and message.
+
+Tell visitors clearly that their email application will open. Do not display a fake “message sent successfully” confirmation.
+
+If a reliable mailto composition flow is not feasible, provide a clearly clickable email address instead of a broken form.
+
+Never embed API keys, secrets, or private service credentials in client-side code.
+
+### J. Footer
+
+- Prince Tyagi
+- Current year generated dynamically
+- Navigation links
+- Profile links
+- Back-to-top link
+
+---
+
+## 8. TECH STACK AND IMPLEMENTATION
+
+Use stable, compatible package versions available in Replit.
+
+Preferred stack:
+
+- React + Vite
+- TypeScript
+- Tailwind CSS or well-structured CSS
+- Three.js through `@react-three/fiber` and `@react-three/drei`
+- Framer Motion or a compatible lightweight animation library
+- Lucide icons where appropriate
+- React Router only if multiple pages genuinely need it
+
+Keep dependencies focused. Avoid unnecessary libraries and fragile APIs.
+
+Create reusable components and a central data/config file, such as:
+
+`src/data/portfolio.ts`
+
+It should hold:
+
+- Biography
+- Skills
+- Education
+- Projects
+- Certificates
+- Profile URLs
+- LeetCode snapshot
+- Internship status
+- Contact details
+
+Use data-driven UI so the owner can update content without editing many components.
+
+Suggested structure:
+
+- `src/components/Navigation.tsx`
+- `src/components/Hero.tsx`
+- `src/components/Scene3D.tsx`
+- `src/components/About.tsx`
+- `src/components/Skills.tsx`
+- `src/components/Projects.tsx`
+- `src/components/Education.tsx`
+- `src/components/Certificates.tsx`
+- `src/components/CodingProfiles.tsx`
+- `src/components/Contact.tsx`
+- `src/components/Footer.tsx`
+- `src/data/portfolio.ts`
+- `src/styles` or CSS/Tailwind configuration
+- `public/` for favicon, social preview image, and optional resume PDF
+
+Adapt the structure if needed, but do not place the entire application inside one enormous component.
+
+---
+
+## 9. FUNCTIONALITY, ACCESSIBILITY, SEO, AND QUALITY
+
+Everything visible as interactive must work.
+
+Verify that:
+
+- Navigation scrolls to the correct sections.
+- Buttons perform their advertised actions.
+- External profile and repository links use correct destinations and safe target/rel attributes.
+- There are no placeholder `href="#"` links, empty buttons, dead links, fake icons, or unimplemented controls.
+- The mobile menu works on touch and keyboard.
+- Contact validation is real and its status message is truthful.
+- The 3D scene loads and responds to interaction.
+- WebGL fallback works.
+- Reduced-motion preferences are respected.
+- Keyboard navigation follows a logical sequence.
+- Skip-to-content works.
+- All controls have accessible names.
+- Focus indicators are visible.
+- Color contrast is adequate.
+- Semantic headings are used.
+- Color is not the only way to communicate status.
+- SEO metadata includes an accurate title, description, theme color, favicon, Open Graph metadata, social preview metadata, and page language.
+
+Use an appropriate title, such as:
+
+“Prince Tyagi | Software Developer Portfolio”
+
+Do not add fake testimonials, client logos, employer logos, ratings, visitor statistics, or claims of production use.
+
+The site content must remain readable before the 3D scene finishes loading.
+
+### Performance
+
+- Mobile-first responsive layouts for phone, tablet, laptop, and desktop
+- Test approximate widths: 360px, 390px, 768px, 1024px, and 1440px
+- Lazy-load the 3D canvas where practical
+- Keep hero text and buttons available immediately
+- Prefer generated geometry rather than large remote assets
+- Reduce shadows, particles, resolution, and animation intensity on mobile
+- Avoid unnecessary re-renders in the 3D scene
+- Do not update React state every animation frame
+- Provide a CSS fallback if WebGL fails
+- Ensure no horizontal overflow on mobile
+- Avoid dependence on remote image URLs that may disappear
+- Avoid copyrighted logos except simple text labels or owner-supplied assets
+
+---
+
+## 10. TESTING AND ACCEPTANCE CHECKLIST
+
+Do not stop after creating a good-looking screenshot. Implement, run, inspect, and fix the actual application.
+
+1. Install compatible dependencies and start the app with the correct Replit run command.
+2. Check terminal output for compilation errors.
+3. Check browser console for runtime errors and missing assets.
+4. Verify the 3D scene genuinely renders and responds to desktop pointer interaction.
+5. Verify the WebGL and reduced-motion fallback.
+6. Test the website at mobile, tablet, laptop, and desktop sizes.
+7. Click every navigation item, CTA, repository link, and social link.
+8. Verify that missing project URLs are not represented by active buttons.
+9. Verify project cards accurately describe features and limitations.
+10. Verify the contact action does not falsely claim a message was delivered.
+11. Verify the date on any static LeetCode statistics.
+12. Verify the internship is not described as completed experience.
+13. Verify that no official Google Student Ambassador or Google employment claim appears.
+14. Verify Class X/XII percentages and B.Tech CGPA are labelled correctly.
+15. Verify there are no made-up metrics, fake achievements, or unsupported skills.
+16. Check keyboard accessibility, focus states, contrast, and reduced-motion behavior.
+17. Fix every reproducible error found during testing.
+18. Provide the project structure, run command, content-editing instructions, and deployment steps.
+19. State truthfully what was tested and what still needs the owner’s input.
+20. Do not claim tests you did not actually perform.
+
+---
+
+## 11. DEPLOYMENT AND OWNER EDITING GUIDE
+
+Make the project easy for a beginner to maintain.
+
+After implementation, give clear instructions for:
+
+- Starting and previewing the site in Replit
+- Updating content, contact details, profiles, skills, project descriptions, certificates, coding stats, and internship status in the central config file
+- Adding real screenshot images later
+- Uploading Fire Detection and Chess Game to GitHub and replacing their unpublished-repository labels with real URLs
+- Adding the resume PDF at `public/Prince_Tyagi_Software_Engineer_Resume.pdf` before enabling the View Resume button
+- Configuring a genuine form backend/provider if the owner later wants submissions beyond mailto
+- Publishing/deploying through Replit’s available deployment workflow and checking the public URL afterward
+
+Do not invent deployment success, URLs, API keys, or credentials. Never place private secrets in client-side code.
+
+---
+
+## 12. FINAL INSTRUCTION TO REPLIT AGENT
+
+Build the complete, functioning portfolio using the accurate information above.
+
+Do not ask unnecessary questions. Use the supplied information and keep unknown details editable. Do not invent data or leave TODOs in core functionality.
+
+If the exact external chess library name is unknown, describe it generically and keep the name unset in configuration. If certificate images are not available as project files, use well-designed text-based credential cards instead of recreating counterfeit certificates. Use original CSS/3D visuals when real project screenshots are absent.
+
+After implementation, open and test the running website, fix errors you can reproduce, and return a concise report containing:
+
+- Features implemented
+- Exact run command
+- Tests actually performed and their results
+- Remaining manual steps, including uploading the project repositories, adding the resume PDF, and updating internship status after joining
+- How to deploy/publish and where to update portfolio content
+
+The final portfolio should look unforgettable at first glance, but its 3D effects must support—not obstruct—the real story:
+
+**Prince Tyagi is a B.Tech CSE (AI & DS) student building practical software projects, strengthening Java/DSA skills, and preparing for software engineering opportunities.**

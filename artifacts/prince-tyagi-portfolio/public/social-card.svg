@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <radialGradient id="glow" cx="80%" cy="35%" r="60%">
+      <stop stop-color="#173c51"/>
+      <stop offset="1" stop-color="#0b0e18" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="stroke" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#8ce4eb"/>
+      <stop offset="1" stop-color="#a895ee"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="#0b0e18"/>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+  <g fill="none" stroke="url(#stroke)" opacity=".32" transform="translate(900 330) rotate(-28)">
+    <ellipse rx="215" ry="75"/>
+    <ellipse rx="260" ry="96" transform="rotate(55)"/>
+    <path d="M-100-100h200v200h-200z" transform="rotate(31)"/>
+  </g>
+  <rect x="82" y="78" width="53" height="53" rx="15" fill="#141d2c" stroke="url(#stroke)" stroke-opacity=".7"/>
+  <text x="108" y="112" text-anchor="middle" fill="#a1e8eb" font-family="Arial,sans-serif" font-size="17" font-weight="700">PT</text>
+  <text x="82" y="271" fill="#eaf0f6" font-family="Arial,sans-serif" font-size="86" font-weight="700" letter-spacing="-5">Prince Tyagi.</text>
+  <text x="84" y="335" fill="#91e1e8" font-family="Arial,sans-serif" font-size="28">Software Developer Portfolio</text>
+  <text x="84" y="388" fill="#aab6c8" font-family="Arial,sans-serif" font-size="21">Computer Science Engineering student · GLA University</text>
+  <text x="84" y="532" fill="#6f8099" font-family="monospace" font-size="14" letter-spacing="2">JAVA  /  DSA  /  PRACTICAL SOFTWARE PROJECTS</text>
+</svg>
