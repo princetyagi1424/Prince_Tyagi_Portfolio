@@ -1,0 +1,323 @@
+# ULTRA-HIGH-FIDELITY WEBSITE ANIMATION UPGRADE — OPENAI REFERENCE
+
+Act as a world-class creative developer, senior frontend engineer, motion designer, Three.js specialist, GSAP expert, and website visual QA engineer.
+
+I already have a complete personal developer portfolio website in this Replit project. The current website has insufficient 3D effects and animations.
+
+I want you to upgrade my EXISTING website to achieve a similarly refined, cinematic, interactive, and visually polished experience to the official reference website:
+
+REFERENCE WEBSITE:
+https://openai.com/index/gpt-6-astra/
+
+IMPORTANT: Do not start by writing new code immediately. First inspect the reference website and my existing project, understand their rendered appearance and interactions, and then implement a carefully planned visual transformation.
+
+My goal is to reproduce the reference website's visual quality, motion language, animation timing, interaction patterns, spatial depth, and smooth storytelling as closely as reasonably possible while adapting the result to my personal developer portfolio.
+
+Do not simply add a few spinning cubes, random particles, gradient backgrounds, or generic Framer Motion animations. I want a deliberate, cohesive, premium-quality experience throughout the entire website.
+
+## PHASE 1 — STUDY THE REFERENCE WEBSITE
+
+Open and inspect the actual rendered reference website in a browser.
+
+Do not rely solely on its page title, textual content, or your assumptions about its design.
+
+Study the website carefully at desktop and mobile viewport sizes.
+
+Observe and document:
+
+1. Its actual background colors, typography, font sizing, spacing, layout grid, and visual hierarchy.
+2. The hero section's composition, entrance animations, media presentation, and motion timing.
+3. How sections enter the viewport when scrolling.
+4. How headings, text, images, visualizations, and media panels are animated.
+5. Whether elements use opacity transitions, masks, transforms, scale, clipping, blur, or staggered reveals.
+6. How large visual elements and media panels are positioned and transitioned.
+7. The relationship between text and animated visual content.
+8. How image and video panels are presented, including cropping and aspect ratios.
+9. Hover interactions, pointer responses, card transitions, and other interactions that can actually be observed.
+10. How the navigation, section spacing, and overall rhythm contribute to the experience.
+11. The differences between the reference's desktop and mobile behavior.
+12. Which visual elements are genuinely rendered in 3D and which are video, image, CSS animation, or ordinary UI.
+
+Do not invent interactions that you cannot observe.
+
+If an effect cannot be reproduced exactly, identify the closest technically appropriate implementation rather than pretending to reproduce it.
+
+Create an internal reference checklist before implementation.
+
+## PHASE 2 — AUDIT MY EXISTING PROJECT
+
+Inspect the complete existing portfolio codebase before making changes.
+
+Identify:
+
+- Its current framework and package versions.
+- Its existing page structure and React components.
+- Its current animation libraries.
+- Its existing Three.js or React Three Fiber implementation, if present.
+- Its current styles and design tokens.
+- Its working navigation, project cards, links, and contact functionality.
+- Its current animation and 3D performance issues.
+
+Do not rebuild the application from scratch without a genuine technical reason.
+
+Preserve all existing correct personal information, education, projects, certificates, coding profiles, links, and working features.
+
+Keep my real portfolio content; adapt only its visual presentation and animations.
+
+## PHASE 3 — RECREATE THE REFERENCE'S VISUAL LANGUAGE
+
+Create a coherent animation and design system based on the reference website's actual observed characteristics.
+
+Match the reference as closely as reasonably achievable in these areas:
+
+- Visual hierarchy.
+- Typography and heading scale.
+- Whitespace and section spacing.
+- Background and foreground treatments.
+- Layout proportions.
+- Media and illustration presentation.
+- Reveal animations.
+- Motion speed and easing.
+- Transition timing.
+- Scroll-based storytelling.
+- Visual emphasis and contrast.
+- Interactive behavior.
+- Responsiveness.
+
+Do not automatically impose a dark neon gaming aesthetic. Follow the reference's actual visual language, while using accent colors only where they fit.
+
+Do not turn the portfolio into a clone of the reference page's content. Adapt its visual treatment to a developer portfolio.
+
+Do not copy OpenAI logos, trademarks, proprietary assets, or page text. Create original portfolio-specific visuals with comparable polish and motion quality.
+
+## PHASE 4 — IMPLEMENT PREMIUM ANIMATIONS
+
+Based on the observed reference, implement as many appropriate high-quality animation patterns as the existing site can support.
+
+### A. Initial page entrance
+
+Create a polished page entrance with a deliberate hierarchy.
+
+Where appropriate, use:
+
+- Smooth heading reveals.
+- Staggered text animation.
+- Mask-based transitions.
+- Subtle opacity and position changes.
+- Carefully timed media entrances.
+- Smooth background transitions.
+- Refined transitions between hero elements.
+
+Avoid excessive artificial loading screens.
+
+The website must remain useful while visual effects initialize.
+
+### B. Scroll-triggered animations
+
+Study how the reference reveals content while scrolling and reproduce comparable behavior.
+
+Use appropriate combinations of:
+
+- Scroll-triggered fade and transform animations.
+- Staggered text and card reveals.
+- Masked heading animations.
+- Clip-path transitions.
+- Subtle parallax.
+- Scale and position interpolation.
+- Scroll-linked visual transformations.
+- Animated section separators.
+- Smooth transitions between content groups.
+- Carefully controlled sticky or pinned sections, only where appropriate.
+
+Use GSAP and ScrollTrigger if they provide the best fit, or enhance the project's existing animation solution.
+
+Avoid duplicating animation triggers or repeatedly restarting animations when they are not supposed to replay.
+
+### C. Visual content and media transitions
+
+Treat large visual panels as important storytelling elements.
+
+Implement suitable effects such as:
+
+- Smooth reveal masks.
+- Subtle scale transitions.
+- Image and video entrance animations.
+- Layered media transitions.
+- Scroll-linked movement.
+- Carefully controlled depth and perspective.
+- Smooth transitions between project visuals.
+- Responsive cropping and positioning.
+
+Do not use blank placeholder panels or fake screenshots of my projects.
+
+When actual project screenshots are unavailable, create original visual illustrations that clearly serve as illustrations rather than pretending to show a real application.
+
+### D. Advanced micro-interactions
+
+Add polished interactions wherever they complement the reference style:
+
+- Refined link hover transitions.
+- Animated navigation indicators.
+- Subtle pointer-responsive lighting.
+- Carefully tuned button hover and press effects.
+- Smooth project card transitions.
+- Interactive visual emphasis.
+- Smooth modal transitions.
+- Subtle focus animations.
+- Touch-friendly mobile interactions.
+
+Avoid magnetic cursors, excessive tilt, or glowing effects if they conflict with the reference's design language.
+
+### E. Genuine 3D effects
+
+Inspect whether the reference uses actual 3D, animated video, illustrations, or CSS-based effects.
+
+Use real Three.js or React Three Fiber for portfolio elements that genuinely benefit from interactive 3D.
+
+Where appropriate, add:
+
+- Custom 3D geometry.
+- Refined lighting and materials.
+- Depth and perspective.
+- Smooth object transformations.
+- Pointer-responsive movement.
+- Subtle camera parallax.
+- Scroll-linked 3D movement.
+- Carefully controlled particles.
+- Elegant transitions between 3D states.
+
+Do not force 3D into every section just because 3D is possible.
+
+Use the reference's actual visual language as the primary guide. Add 3D where it improves the experience rather than making the website look cluttered.
+
+Any 3D element must render as real interactive geometry, not as a static image pretending to be 3D.
+
+## PHASE 5 — APPLY THE ANIMATION SYSTEM THROUGHOUT THE PORTFOLIO
+
+Upgrade every existing section as appropriate:
+
+1. Navigation.
+2. Hero.
+3. About Me.
+4. Technical Skills.
+5. Projects.
+6. Education.
+7. Certificates.
+8. Coding Profiles.
+9. Contact.
+10. Footer.
+
+Use a consistent motion system so the website feels like one coherent experience rather than separate collections of effects.
+
+The hero should create an excellent first impression, but the remaining sections must maintain the same level of visual polish.
+
+Keep content readable and preserve the existing page's real information.
+
+Avoid long pinned sequences that make ordinary browsing frustrating.
+
+## PHASE 6 — TECHNICAL IMPLEMENTATION
+
+Use the project's existing compatible architecture.
+
+Possible tools include:
+
+- React and TypeScript, if already used.
+- GSAP and ScrollTrigger.
+- Framer Motion or the existing compatible animation library.
+- Three.js and React Three Fiber where genuine 3D is needed.
+- CSS transforms, transitions, masks, and gradients.
+- IntersectionObserver for lightweight viewport-triggered effects when appropriate.
+
+Do not install every library listed above automatically. Choose only what is useful.
+
+Use reusable animation components and shared timing/easing definitions.
+
+Avoid conflicting animation systems manipulating the same element.
+
+Prevent unnecessary React re-renders during animation frames.
+
+Clean up event listeners, observers, animation contexts, and WebGL resources.
+
+## PHASE 7 — MOBILE AND PERFORMANCE
+
+The upgraded portfolio must continue to work well on phones, tablets, laptops, and desktops.
+
+Requirements:
+
+- Responsive motion and layout.
+- No horizontal overflow.
+- No blocked scrolling.
+- Touch-friendly behavior.
+- Reduced animation complexity on lower-powered devices.
+- Lazy loading for expensive 3D scenes when practical.
+- Adaptive rendering quality where appropriate.
+- Efficient particle rendering and geometry reuse.
+- No excessive GPU usage.
+- No memory leaks.
+- Graceful fallback if WebGL is unavailable.
+- Support for `prefers-reduced-motion`.
+- Readable content even before animations finish.
+- No critical information hidden exclusively behind hover effects.
+
+Do not sacrifice usability for visual spectacle.
+
+## PHASE 8 — VISUAL COMPARISON AND QUALITY ASSURANCE
+
+After implementing the changes, run the actual website and inspect it in a browser.
+
+Compare its visual appearance and motion against the reference.
+
+Evaluate:
+
+- Typography and spacing.
+- Hero composition.
+- Scroll behavior.
+- Animation timing.
+- Media transitions.
+- Interaction quality.
+- Section continuity.
+- Mobile behavior.
+- Visual consistency.
+- Performance and responsiveness.
+
+Fix the most noticeable differences in quality and behavior through additional implementation passes.
+
+Test approximately these viewport widths:
+
+- 360px.
+- 390px.
+- 768px.
+- 1024px.
+- 1440px.
+
+Check browser console errors, runtime errors, broken links, missing assets, and any interactions affected by the changes.
+
+Verify that all existing working features continue to function.
+
+Do not claim that visual comparisons or tests were completed unless you actually performed them.
+
+If the reference website cannot be accessed by your browser tools, do not pretend you inspected it. Explain this limitation briefly and implement only what can be responsibly inferred, requesting screenshots or recordings if exact visual matching still requires them.
+
+## FINAL ACCEPTANCE CRITERIA
+
+The task is complete when:
+
+- The existing portfolio remains functional.
+- The reference website has actually been inspected, or access limitations are explicitly disclosed.
+- The animation system follows the reference's observed visual language.
+- Scrolling feels intentional and polished.
+- Typography and media reveal effects are refined.
+- The hero and all other sections have consistent visual quality.
+- Real 3D is used only where appropriate.
+- The result is visually impressive without being cluttered.
+- Mobile behavior and accessibility remain good.
+- No major new runtime or build errors remain.
+- Any remaining limitations are reported honestly.
+
+Do not stop after generating a plan, suggesting effects, or making a few CSS tweaks.
+
+Inspect, implement, run, compare, refine, and test the actual website.
+
+At the end, tell me what was changed, which animation systems were implemented, which interactions were verified, and what could not be matched exactly.
+
+Begin by studying the reference and auditing my existing codebase.

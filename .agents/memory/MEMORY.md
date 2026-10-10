@@ -1,0 +1,1 @@
+- [Portfolio content integrity](portfolio-content-integrity.md) — Preserve verified profile, credential, project, link, and dated coding-profile data during visual work.

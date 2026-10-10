@@ -1,0 +1,444 @@
+# MASTER UPGRADE PROMPT — TRANSFORM MY PORTFOLIO INTO AN ULTRA-PREMIUM 3D EXPERIENCE
+
+Act as an award-winning creative developer, Three.js specialist, React animation engineer, motion designer, and senior frontend performance engineer.
+
+My portfolio website has already been built in this Replit project, but its current 3D effects and animations are too minimal. I want you to UPGRADE THE EXISTING WEBSITE into an extraordinary, immersive, highly interactive 3D developer portfolio.
+
+IMPORTANT: This is an enhancement task, not a rebuild-from-scratch task. First inspect the entire existing codebase, identify the current framework, components, styles, installed libraries, existing functionality, and 3D implementation. Then improve the actual project.
+
+Do not merely give me instructions, a plan, a mockup, or code snippets. Make the changes directly in the existing project, run it, inspect it, and fix problems.
+
+## 1. OVERALL VISUAL VISION
+
+Transform my website into an immersive futuristic digital experience combining:
+
+- Premium 3D environments
+- Real-time WebGL graphics
+- Interactive 3D objects
+- Cinematic transitions
+- Scroll-triggered animations
+- Smooth camera movements
+- Interactive particle simulations
+- Advanced lighting and materials
+- Depth, perspective, and parallax
+- Animated typography
+- Sophisticated hover interactions
+- Beautiful transitions between sections
+- Professional UI and carefully controlled visual effects
+
+The result should feel like a custom-designed, award-winning creative developer portfolio, not an ordinary template.
+
+Use a sophisticated black, midnight-navy, electric-blue, cyan, and violet design system. Add atmospheric lighting, subtle bloom where appropriate, transparent glass-like materials, animated gradients, volumetric-looking effects where practical, and elegant depth.
+
+Maximize the visual impact of the 3D and animation experience while keeping the website readable, professional, and usable.
+
+Do not confuse quality with random movement. Every animation must look intentional and polished.
+
+## 2. TECHNOLOGY AND PROJECT SAFETY
+
+Use the existing compatible project stack wherever possible.
+
+If the current project uses React, Vite, TypeScript, Three.js, React Three Fiber, Drei, Framer Motion, or another animation library, inspect how it is currently implemented before changing anything.
+
+Use suitable existing dependencies instead of installing duplicate libraries.
+
+You may introduce GSAP with ScrollTrigger or another compatible tool if it meaningfully improves scroll-based animations and can be integrated safely.
+
+For genuine 3D, use Three.js or React Three Fiber if compatible with the existing architecture.
+
+Do not replace a functional application with a new project, static screenshot, video background, or collection of fake 3D-looking cards.
+
+Do not delete my current sections, content, profile URLs, project descriptions, certificates, education, or working functionality.
+
+Preserve all existing correct information. Fix only genuine issues found while inspecting the project.
+
+## 3. BUILD AN INCREDIBLE INTERACTIVE 3D HERO
+
+The first screen must immediately communicate that this is a highly polished 3D developer portfolio.
+
+Create a genuinely rendered and interactive 3D environment featuring several coordinated elements:
+
+- A central abstract 3D core representing technology and software engineering.
+- Multiple orbiting geometric objects with independent motion paths.
+- Floating glass-like cubes, spheres, toruses, and custom geometric forms.
+- Animated wireframe structures and subtle glowing edges.
+- Beautiful particle fields containing hundreds of particles where performance permits.
+- Curved orbital rings with different rotations and depths.
+- Small connecting particles and occasional animated light trails.
+- A procedural starfield or elegant digital-space environment.
+- Subtle fog, atmospheric lighting, and depth.
+- A few floating code-inspired symbols or abstract programming motifs.
+- A small chess-inspired geometric object as a personal reference.
+- Reacting lights and materials that respond subtly to pointer movement.
+- An animated background that changes composition as the viewer scrolls.
+
+Use procedural geometry and shader effects when appropriate. Do not depend on random external images.
+
+### Hero interactions
+
+1. Add subtle mouse-based camera parallax.
+2. Let selected 3D objects rotate or respond to pointer proximity.
+3. Add smooth object attraction or repulsion effects where practical.
+4. Create elegant transitions in lighting, object position, and camera framing.
+5. Use restrained, continuous idle animations.
+6. Add an interactive focus effect when hovering over selected objects.
+7. Give primary buttons a polished magnetic hover effect.
+8. Add a sophisticated pointer-responsive glow.
+9. Reveal the hero heading and subtitle through staggered animation.
+10. Animate selected words or text gradients without compromising readability.
+11. Make the primary buttons animate on hover, press, and keyboard focus.
+12. Use a graceful transition from the hero into the About section.
+13. Include a beautiful animated scroll indicator.
+14. Consider a subtle camera movement as the visitor starts scrolling.
+
+The hero must have multiple layers of depth and meaningful motion, not just one rotating cube.
+
+Do not let the 3D scene cover text, block button clicks, or interfere with selecting text.
+
+## 4. CREATE A RICH BACKGROUND MOTION SYSTEM
+
+Replace flat static backgrounds with an elegant, layered environment.
+
+Implement suitable combinations of:
+
+- Slowly shifting radial gradients.
+- Animated aurora-like light fields.
+- Subtle floating dust and particles.
+- Procedural grid lines with perspective.
+- Faint circuit-inspired patterns.
+- Animated glowing paths.
+- Small light pulses moving along selected curves.
+- Soft animated bokeh.
+- A subtle pointer-following spotlight.
+- Scroll-responsive background movement.
+- Section-specific ambient lighting.
+- Subtle depth layers moving at different speeds.
+
+Add these effects with restraint and prevent excessive GPU usage.
+
+Avoid continuously animating every background layer at full intensity.
+
+## 5. ADD CINEMATIC SCROLL ANIMATIONS
+
+Use a coherent scroll-animation system to make the entire website feel connected.
+
+Where appropriate, implement:
+
+- Staggered text reveals.
+- Word-by-word or line-by-line hero title animation.
+- Section headings revealed through masks.
+- Fade, blur, and translate transitions.
+- Cards that enter with staggered timing.
+- Parallax background movement.
+- Layered content entrances.
+- Smooth changes in accent lighting.
+- Scroll-linked 3D object positioning.
+- Camera movement between selected sections.
+- Rotating or transforming decorative objects during scroll.
+- Animated section dividers.
+- Subtle pinned scenes where they create genuine value.
+- Smooth transitions between project cards.
+- Controlled scale and opacity transformations.
+- Scroll-progress indicators.
+
+Use GSAP ScrollTrigger or the project's existing compatible animation tools.
+
+Animations must not prevent normal scrolling, break mobile gestures, or trap visitors in pinned sections.
+
+Do not turn every section into a long, forced cinematic presentation. Maintain a natural browsing experience.
+
+## 6. UPGRADE EVERY SECTION
+
+### Navigation
+
+Create a premium floating or glass-style navigation bar with:
+
+- Smooth entrance animation.
+- Active section indicator.
+- Animated underline or border.
+- Subtle hover lighting.
+- Magnetic interactions on desktop where appropriate.
+- Scroll-responsive background opacity.
+- Smooth mobile menu transitions.
+- Accessible keyboard navigation.
+
+The navigation must remain readable and must never cover section titles.
+
+### About section
+
+Make the section feel dimensional using:
+
+- Layered cards with subtle perspective.
+- An animated orbital diagram or abstract technical object.
+- Floating visual elements.
+- Scroll-triggered content reveals.
+- Interactive accent lighting.
+- Staggered biography text.
+- Subtle 3D tilt on selected decorative cards.
+
+Keep all profile information genuine.
+
+### Skills section
+
+Present existing skills through a visually impressive interactive composition.
+
+Possible effects:
+
+- Floating skill chips.
+- Animated connecting lines.
+- Three-dimensional skill clusters.
+- Rotating orbital rings.
+- Mouse-responsive cards.
+- Animated icons and borders.
+- Category-based transitions.
+- Subtle particle effects when interacting with selected skill groups.
+
+Use only skills already present in the website's verified content. Never invent proficiency scores or percentages.
+
+Animations should improve exploration, not make the skills difficult to read.
+
+### Projects section
+
+Turn project cards into premium interactive surfaces.
+
+Implement:
+
+- Perspective-based 3D hover tilt.
+- Light that follows the cursor within each card.
+- Animated gradient borders.
+- Layered shadows and depth.
+- Small floating particles or decorative geometry.
+- Staggered scroll entrance animations.
+- Smooth image or illustration reveals.
+- Animated technology tags.
+- Elegant expand or modal transitions.
+- Sophisticated hover states for valid links.
+- Responsive interactions that work on touchscreens.
+
+Create original CSS or procedural 3D visuals when real screenshots are unavailable.
+
+Do not present illustrative artwork as a screenshot of a real application.
+
+Do not invent demo URLs or enable buttons without valid destinations.
+
+Preserve the honest status and actual capabilities of my Fire Detection System, Chess Game, and Java DSA practice.
+
+### Education and certificates
+
+Add restrained timeline animations, subtle connecting lines, staggered credential cards, elegant date transitions, and carefully controlled hover depth.
+
+Keep dates, grades, certificates, and credential descriptions accurate.
+
+Do not recreate fake certificate images or imply unearned qualifications.
+
+### Coding profiles
+
+Create visually appealing GitHub, LeetCode, LinkedIn, and other existing profile cards.
+
+Use subtle 3D elevation, animated borders, a cursor-responsive spotlight, and smooth icon transitions.
+
+All links must retain their existing correct destinations.
+
+Do not fabricate live profile statistics.
+
+### Contact section
+
+Create a striking final section with an immersive but lightweight 3D visual, animated ambient lighting, smooth form reveals, and polished button interactions.
+
+Retain the existing contact functionality and accurately communicate submission status.
+
+Do not invent a backend or display fake success messages.
+
+### Footer
+
+Add a smooth entrance, subtle decorative motion, polished links, and a functional back-to-top interaction.
+
+Do not make the footer distracting.
+
+## 7. ADVANCED INTERACTION EFFECTS
+
+Implement as many of the following as are appropriate for the existing website:
+
+- Desktop custom cursor with a subtle outer ring.
+- Cursor-following spotlight.
+- Magnetic buttons.
+- Cursor-reactive card lighting.
+- 3D card tilt.
+- Animated text gradients.
+- Text reveal masks.
+- Smooth section transitions.
+- Scroll progress bar.
+- Interactive geometric objects.
+- Particle motion with depth.
+- Orbital animation systems.
+- Subtle parallax.
+- Animated navigation indicators.
+- Elegant button ripple or press effects.
+- Small section-specific 3D decorations.
+- Focus and hover glow effects.
+- Animated counters only for genuine numeric information.
+- Loading transition for heavy 3D scenes.
+- Smooth modal and drawer animations.
+- Animated mobile navigation.
+- Back-to-top animation.
+- Controlled ambient motion.
+
+A custom cursor must be disabled on mobile and must never replace the native cursor where it would harm usability.
+
+Do not animate every element simultaneously. Prioritize a strong visual hierarchy and varied animation timing.
+
+## 8. MAKE THE 3D ENVIRONMENT ACTUALLY INTERACTIVE
+
+I do not want superficial CSS effects that merely make cards look three-dimensional.
+
+Use real 3D geometry, cameras, materials, lighting, transformations, and depth whenever appropriate.
+
+The central 3D experience should include:
+
+- Multiple independently animated objects.
+- Different orbital paths and rotation speeds.
+- Meaningful changes based on pointer movement.
+- Subtle camera parallax.
+- Selected scroll-linked transformations.
+- Appropriate layering and occlusion.
+- Real-time lighting and material response.
+- Smooth interpolation instead of abrupt transformations.
+- Efficient animation loops.
+
+Use `useFrame` or an equivalent animation loop for React Three Fiber where appropriate. Avoid updating the full React component state on every frame.
+
+Keep interactive UI controls outside the WebGL canvas when necessary.
+
+Make it possible to disable or reduce effects without disabling the website's main content.
+
+## 9. ANIMATION QUALITY
+
+Every animation must be carefully tuned.
+
+Use suitable easing curves, spring physics, damped interpolation, and consistent timing.
+
+Suggested motion principles:
+
+- Small UI hover effects: approximately 150–300 ms.
+- Section and card reveals: approximately 400–900 ms.
+- Major scene transitions: approximately 700–1500 ms where appropriate.
+- Continuous ambient motion: slow, subtle, and non-distracting.
+
+These are guidelines, not mandatory delays for every effect.
+
+Avoid:
+- Excessive bouncing.
+- Constant full-screen camera movement.
+- Flashing or rapidly changing lights.
+- Motion that makes text hard to read.
+- Artificial loading delays.
+- Animations that replay unnecessarily whenever a user scrolls a few pixels.
+- Heavy filters applied to the entire page.
+- Interactions that work only with a mouse.
+- Overuse of spinning objects.
+- Multiple conflicting animation libraries controlling the same element.
+
+The website should feel responsive and luxurious, not laggy or chaotic.
+
+## 10. PERFORMANCE AND MOBILE OPTIMIZATION
+
+I want strong 3D visuals, but the website must remain usable.
+
+Implement:
+
+- Lazy loading of the heavy 3D scene where practical.
+- A lightweight initial render.
+- Reasonable particle limits.
+- Adaptive rendering quality.
+- Reduced shadow complexity on mobile.
+- Efficient geometry reuse and instancing for repeated objects.
+- Cleanup of animation frames, event listeners, and observers.
+- No unnecessary re-renders.
+- No memory leaks.
+- A graceful WebGL fallback.
+- Reduced-motion support.
+- Respect for low-powered devices.
+- Touch-friendly controls.
+- Responsive typography and layouts.
+- No horizontal page overflow.
+- No blocking of scrolling by the 3D canvas.
+- No remote assets that must load before essential content becomes usable.
+
+Where supported, pause or reduce nonessential animations when the browser tab is hidden.
+
+### Accessibility
+
+Respect `prefers-reduced-motion`.
+
+When reduced motion is enabled, replace complex movement with restrained fades, remove unnecessary parallax, and disable distracting continuous animation.
+
+Maintain semantic HTML, visible focus indicators, sufficient contrast, and accessible navigation.
+
+## 11. PRESERVE THE EXISTING WEBSITE
+
+This requirement is critical.
+
+Before modifying the code:
+
+1. Inspect the existing folder structure.
+2. Inspect the current 3D implementation.
+3. Identify working sections, links, and features.
+4. Identify the actual installed dependencies.
+5. Determine why the current animation and 3D effects appear limited.
+
+Then enhance the existing architecture rather than replacing everything unnecessarily.
+
+Do not remove working functionality.
+
+Do not change my personal information, verified project details, certificates, education, links, or coding profile data.
+
+Do not expose API keys or secrets.
+
+Do not add a backend unless a real requirement exists.
+
+Do not create duplicate dependencies or unnecessary configuration files.
+
+Do not leave unfinished placeholder features.
+
+## 12. TEST THE ACTUAL RESULT
+
+After implementation:
+
+1. Start the existing project using the correct Replit command.
+2. Inspect the browser preview.
+3. Confirm that real 3D geometry is rendered.
+4. Test pointer interaction and relevant scroll-triggered animations.
+5. Check mobile navigation and touch interaction.
+6. Test approximate widths of 360px, 390px, 768px, 1024px, and 1440px.
+7. Check the browser console and terminal for errors.
+8. Verify that every section remains readable during motion.
+9. Verify that buttons, project links, and navigation still work.
+10. Check WebGL fallback and reduced-motion behavior.
+11. Check that animations are not causing major responsiveness or scrolling problems.
+12. Fix reproducible errors rather than merely reporting them.
+
+Do not claim successful testing unless you actually performed it.
+
+## 13. FINAL ACCEPTANCE CRITERIA
+
+The upgrade is complete only when:
+
+- The first screen has a genuinely impressive 3D scene.
+- The scene has multiple independently animated elements.
+- Pointer and scroll interactions create meaningful visual changes.
+- The website includes sophisticated transitions and micro-interactions.
+- Project cards, navigation, skills, and other sections have polished animations.
+- Background effects and lighting create a cohesive visual atmosphere.
+- The 3D effects work without obstructing content or interaction.
+- The site remains responsive and readable on mobile.
+- All existing links and functionality remain intact.
+- Performance is reasonable and reduced-motion behavior works.
+- No critical build or runtime errors remain.
+
+Do not stop after adding a few animated CSS cards or rotating one cube.
+
+Aim for the maximum visual quality that can be implemented responsibly within the existing project.
+
+Prioritize genuine 3D depth, cinematic but controlled motion, rich interactions, and a cohesive design system.
+
+Start by inspecting the current codebase, then implement the complete enhancement directly in Replit and test the running website. At the end, summarize the major 3D effects and animations you actually implemented, any performance fallbacks, and what you verified.
