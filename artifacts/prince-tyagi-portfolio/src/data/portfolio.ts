@@ -62,10 +62,7 @@ export const portfolio = {
     university: 'GLA University, Mathura',
     duration: '2025–2029 (Expected)',
     cgpa: 'Current CGPA: 7.76/10',
-    schools: [
-      { level: 'Class XII', school: 'S.K.R. Inter College · UP Board', score: '63.4%' },
-      { level: 'Class X', school: 'S.K.R. Inter College · UP Board', score: '79%' },
-    ],
+    schools: [],
   },
   certificates: [
     {
@@ -102,12 +99,6 @@ export const portfolio = {
       profile: 'https://www.hackerrank.com/profile/princetyagi3726',
     },
   ],
-  internship: {
-    title: 'Incoming Data Science Intern — Pinnacle Labs',
-    status: 'Incoming',
-    details: 'Remote · One-month offer-letter duration',
-    date: 'Joining date: 12 October 2026',
-  },
   profiles: [
     { name: 'GitHub', url: 'https://github.com/princetyagi1424' },
     { name: 'LeetCode', url: 'https://leetcode.com/u/princeytyagi/' },
