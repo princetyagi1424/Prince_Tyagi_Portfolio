@@ -11,16 +11,19 @@ export function Hero(_props: HeroProps) {
     <section className="hero" id="home" aria-labelledby="hero-title">
       <div className="wrap hero-inner">
         <div className="hero-copy reveal">
-          <div className="hero-status flex items-center gap-2.5 px-3 py-1.5 rounded-full border border-slate-300 bg-white">
+          <div className="hero-status flex items-center gap-2.5 px-3 py-1.5 rounded-full border border-slate-300 bg-white max-w-full">
             <img
               src="/prince-tyagi.jpg"
               alt="Portrait of Prince Tyagi"
               width={24}
               height={24}
-              className="w-6 h-6 rounded-full object-cover border border-slate-300"
+              className="w-6 h-6 rounded-full object-cover border border-slate-300 shrink-0"
             />
-            <span className="status-dot" />
-            <span className="text-slate-700 text-sm font-mono">{portfolio.person.title}</span>
+            <span className="status-dot shrink-0" />
+            <span className="text-slate-700 text-sm font-mono leading-snug">
+              <span className="hidden sm:inline">{portfolio.person.title}</span>
+              <span className="sm:hidden">CSE Student · Software Developer</span>
+            </span>
           </div>
 
           <h1 id="hero-title" className="display">
@@ -32,7 +35,7 @@ export function Hero(_props: HeroProps) {
           </p>
 
           <p className="hero-support">
-            B.Tech CSE (AI &amp; Data Science) student at GLA University, expected to graduate in 2029. Currently focused on Java, DSA, and practical software projects.
+            B.Tech CSE (AI & Data Science) student at GLA University, expected to graduate in 2029. Currently focused on Java, DSA, and practical software projects.
           </p>
 
           <div className="hero-actions">
