@@ -10,7 +10,7 @@ interface NavigationProps {
 export function Navigation({ onReplayIntro }: NavigationProps) {
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState('#home');
-  const { theme, toggle, isDark } = useTheme();
+  const { toggle, isDark } = useTheme();
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -47,10 +47,44 @@ export function Navigation({ onReplayIntro }: NavigationProps) {
     };
   }, [open]);
 
+  const goTo = (href: string) => {
+    setOpen(false);
+    window.setTimeout(() => {
+      const el = document.querySelector(href);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        try {
+          history.replaceState(null, '', href);
+        } catch {
+          // ignore
+        }
+      } else {
+        window.location.hash = href;
+      }
+    }, 50);
+  };
+
   return (
-    <div className="nav-wrap">
+    <div className={`nav-wrap${open ? ' nav-wrap--open' : ''}`}>
+      {open && (
+        <button
+          type="button"
+          className="nav-scrim"
+          aria-label="Close menu"
+          onClick={() => setOpen(false)}
+        />
+      )}
+
       <nav className="nav" aria-label="Main navigation">
-        <a href="#home" className="brand" onClick={() => setOpen(false)} aria-label="Prince Tyagi, home">
+        <a
+          href="#home"
+          className="brand"
+          onClick={(e) => {
+            e.preventDefault();
+            goTo('#home');
+          }}
+          aria-label="Prince Tyagi, home"
+        >
           <span className="brand-mark relative overflow-hidden border border-slate-300">
             <img
               src="/prince-tyagi.jpg"
@@ -64,13 +98,21 @@ export function Navigation({ onReplayIntro }: NavigationProps) {
           <span>Prince Tyagi</span>
         </a>
 
-        <div className={`nav-links ${open ? 'open' : ''}`} id="primary-links">
+        <div
+          className={`nav-links${open ? ' open' : ''}`}
+          id="primary-links"
+          role="navigation"
+          aria-hidden={!open}
+        >
           {navigation.map((item) => (
             <a
               key={item.href}
               href={item.href}
               aria-current={active === item.href ? 'location' : undefined}
-              onClick={() => setOpen(false)}
+              onClick={(e) => {
+                e.preventDefault();
+                goTo(item.href);
+              }}
             >
               {item.label}
             </a>
@@ -78,19 +120,19 @@ export function Navigation({ onReplayIntro }: NavigationProps) {
           {onReplayIntro && (
             <button
               type="button"
-              className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[13px] font-mono border border-slate-300 transition-all cursor-pointer"
+              className="nav-intro-btn"
               onClick={() => {
                 setOpen(false);
                 onReplayIntro();
               }}
               title="Play 3D intro animation"
             >
-              <Sparkles size={11} /> Intro
+              <Sparkles size={14} /> Intro
             </button>
           )}
         </div>
 
-        <div className="nav-actions" style={{ display: 'flex', alignItems: 'center', gap: 8, marginLeft: 'auto' }}>
+        <div className="nav-actions">
           <button
             type="button"
             className="theme-toggle"
@@ -113,21 +155,6 @@ export function Navigation({ onReplayIntro }: NavigationProps) {
           </button>
         </div>
       </nav>
-      {open && (
-        <button
-          type="button"
-          aria-label="Close menu"
-          onClick={() => setOpen(false)}
-          style={{
-            position: 'fixed',
-            inset: 0,
-            zIndex: 30,
-            background: 'rgba(0,0,0,0.45)',
-            border: 'none',
-            cursor: 'pointer',
-          }}
-        />
-      )}
     </div>
   );
 }
