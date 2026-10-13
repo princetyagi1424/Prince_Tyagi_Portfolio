@@ -1,12 +1,12 @@
 import React from 'react';
-import { Terminal, Cpu, Globe, Database, GitBranch, Eye } from 'lucide-react';
+import { Terminal, Cpu, Globe, Database, GitBranch, Hand } from 'lucide-react';
 import { portfolio } from '../data/portfolio';
 
 const categoryIcons: Record<string, React.ReactNode> = {
   'Programming Languages': <Terminal size={18} className="text-blue-700" />,
   'DSA & Core CS': <Cpu size={18} className="text-indigo-700" />,
   'Web Development': <Globe size={18} className="text-sky-700" />,
-  'AI & Computer Vision': <Eye size={18} className="text-violet-700" />,
+  'Computer Vision & Interaction': <Hand size={18} className="text-violet-700" />,
   'Data Science': <Database size={18} className="text-teal-700" />,
   'Developer Tools': <GitBranch size={18} className="text-blue-700" />,
 };
@@ -39,7 +39,7 @@ export function Skills() {
           <div>
             <span className="section-kicker">02 / Technical toolkit</span>
             <h2 id="skills-title" className="display">
-              Tools I’m learning<br />and using.
+              Tools I'm learning<br />and using.
             </h2>
           </div>
           <p>

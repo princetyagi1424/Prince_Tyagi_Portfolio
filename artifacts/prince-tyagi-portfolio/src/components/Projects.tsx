@@ -1,12 +1,10 @@
 import type { ReactNode } from 'react';
-import { ArrowUpRight, Crown, Flame, Github, Hand, MapPinned } from 'lucide-react';
+import { ArrowUpRight, Github, Hand, MapPinned } from 'lucide-react';
 import { portfolio } from '../data/portfolio';
 
 const icons: Record<string, ReactNode> = {
   gesture: <Hand size={56} strokeWidth={1.4} />,
   map: <MapPinned size={56} strokeWidth={1.4} />,
-  fire: <Flame size={56} strokeWidth={1.4} />,
-  chess: <Crown size={56} strokeWidth={1.4} />,
 };
 
 export function Projects() {
