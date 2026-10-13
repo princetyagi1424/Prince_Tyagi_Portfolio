@@ -38,10 +38,8 @@ export function CinematicIntro({ onComplete, isOpen }: CinematicIntroProps) {
   const [subtitleVisible, setSubtitleVisible] = useState(false);
   const [isFadingOut, setIsFadingOut] = useState(false);
 
-  // Pointer position for subtle 3D parallax
   const mouseRef = useRef({ x: 0, y: 0, targetX: 0, targetY: 0 });
 
-  // Stable callback ref to avoid effect recreation
   const onCompleteRef = useRef(onComplete);
   onCompleteRef.current = onComplete;
 
@@ -54,7 +52,6 @@ export function CinematicIntro({ onComplete, isOpen }: CinematicIntroProps) {
     }, 450);
   }, []);
 
-  // Keyboard shortcut (Escape to skip)
   useEffect(() => {
     if (!isOpen) return;
     const onKeyDown = (e: KeyboardEvent) => {
@@ -66,7 +63,6 @@ export function CinematicIntro({ onComplete, isOpen }: CinematicIntroProps) {
     return () => window.removeEventListener('keydown', onKeyDown);
   }, [isOpen, handleSkip]);
 
-  // Handle prefers-reduced-motion
   useEffect(() => {
     if (!isOpen) return undefined;
     const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -79,10 +75,8 @@ export function CinematicIntro({ onComplete, isOpen }: CinematicIntroProps) {
     return undefined;
   }, [isOpen, handleSkip]);
 
-  // Main 3D Particle Animation Loop
   useEffect(() => {
     if (!isOpen) {
-      // Reset state for potential replay
       hasFinishedRef.current = false;
       startTimeRef.current = null;
       setIsFadingOut(false);
@@ -101,16 +95,16 @@ export function CinematicIntro({ onComplete, isOpen }: CinematicIntroProps) {
     let height = (canvas.height = window.innerHeight);
 
     const isMobile = width < 768;
-    const particleCount = isMobile ? 950 : 2000;
+    const isTiny = width < 400;
+    const particleCount = isTiny ? 420 : isMobile ? 650 : 1600;
 
-    // Palette inspired by GPT-6 Astra: Cyan, Electric Sky, Deep Violet, Ice White
     const palette = [
-      '#38bdf8', // bright sky cyan
-      '#67e8f9', // luminous aqua
-      '#818cf8', // vibrant indigo
-      '#c084fc', // celestial violet
-      '#e0f2fe', // icy starlight
-      '#ffffff', // diamond white highlight
+      '#38bdf8',
+      '#67e8f9',
+      '#818cf8',
+      '#c084fc',
+      '#e0f2fe',
+      '#ffffff',
     ];
 
     let textTargets: { x: number; y: number }[] = [];
@@ -152,7 +146,6 @@ export function CinematicIntro({ onComplete, isOpen }: CinematicIntroProps) {
         }
       }
 
-      // Shuffle points evenly
       for (let i = points.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [points[i], points[j]] = [points[j], points[i]];
@@ -163,7 +156,6 @@ export function CinematicIntro({ onComplete, isOpen }: CinematicIntroProps) {
 
     sampleTextPoints();
 
-    // Create particles
     const particles: Particle[] = [];
     const maxRadius = Math.max(width, height) * 0.78;
 
@@ -225,7 +217,7 @@ export function CinematicIntro({ onComplete, isOpen }: CinematicIntroProps) {
     window.addEventListener('resize', handleResize);
     window.addEventListener('pointermove', handlePointerMove, { passive: true });
 
-    const totalDuration = 3800; // 3.8s target runtime
+    const totalDuration = 3800;
 
     const render = (now: number) => {
       if (!isRunningRef.current) return;
@@ -236,14 +228,12 @@ export function CinematicIntro({ onComplete, isOpen }: CinematicIntroProps) {
 
       const elapsed = now - startTimeRef.current;
 
-      // Mouse smooth interpolation
       mouseRef.current.x += (mouseRef.current.targetX - mouseRef.current.x) * 0.06;
       mouseRef.current.y += (mouseRef.current.targetY - mouseRef.current.y) * 0.06;
 
       const px = mouseRef.current.x * 24;
       const py = mouseRef.current.y * 18;
 
-      // Sequence timeline
       if (elapsed > 2300 && !subtitleVisible) {
         setSubtitleVisible(true);
       }
@@ -256,11 +246,9 @@ export function CinematicIntro({ onComplete, isOpen }: CinematicIntroProps) {
         }, 450);
       }
 
-      // Draw background
       ctx.fillStyle = '#060811';
       ctx.fillRect(0, 0, width, height);
 
-      // Deep atmospheric glow (GPT-6 Astra style)
       const grad = ctx.createRadialGradient(
         width * 0.5 + px * 0.4,
         height * 0.44 + py * 0.4,
@@ -276,14 +264,12 @@ export function CinematicIntro({ onComplete, isOpen }: CinematicIntroProps) {
       ctx.fillStyle = grad;
       ctx.fillRect(0, 0, width, height);
 
-      // Morph factor: 0 in spiral phase, smoothly transitions to 1 in name formation phase
       let morphFactor = 0;
       if (elapsed > 1000) {
         const t = Math.min(1, Math.max(0, (elapsed - 1000) / 1400));
         morphFactor = t * t * (3 - 2 * t);
       }
 
-      // Draw energy lines between nearby particles during assembly
       if (morphFactor > 0.15 && morphFactor < 0.92 && !isMobile) {
         ctx.lineWidth = 0.5;
         const step = 20;
@@ -306,23 +292,19 @@ export function CinematicIntro({ onComplete, isOpen }: CinematicIntroProps) {
         }
       }
 
-      // Render all particles
       for (let i = 0; i < particles.length; i++) {
         const p = particles[i];
 
-        // 1. Vortex trajectory
         p.angle += p.speed * (1 + (1 - morphFactor) * 1.6);
         const curRadius = p.radius * (1 - morphFactor * 0.68);
         const spiralX = width * 0.5 + Math.cos(p.angle) * curRadius + p.driftX * (elapsed * 0.02);
         const spiralY = height * 0.44 + Math.sin(p.angle) * (curRadius * 0.58) + p.driftY * (elapsed * 0.02);
         const spiralZ = p.originZ * (1 - morphFactor);
 
-        // 2. Target text position
         const destX = p.targetX;
         const destY = p.targetY;
         const destZ = p.targetZ;
 
-        // Smooth 3D blending
         const currentX = spiralX * (1 - morphFactor) + destX * morphFactor + px * (0.02 + (p.z / 900) * 0.04);
         const currentY = spiralY * (1 - morphFactor) + destY * morphFactor + py * (0.02 + (p.z / 900) * 0.04);
         const currentZ = spiralZ * (1 - morphFactor) + destZ * morphFactor;
@@ -331,7 +313,6 @@ export function CinematicIntro({ onComplete, isOpen }: CinematicIntroProps) {
         p.y = currentY;
         p.z = currentZ;
 
-        // Shimmer & opacity
         const shimmer = Math.sin(elapsed * 0.006 + i) * 0.2 + 0.8;
         const entryFade = Math.min(1, elapsed / 450);
         const finalAlpha = Math.min(1, p.baseAlpha * shimmer * entryFade);
@@ -352,7 +333,6 @@ export function CinematicIntro({ onComplete, isOpen }: CinematicIntroProps) {
         ctx.restore();
       }
 
-      // Elegant luminous light sweep across the formed name
       if (elapsed > 2100 && elapsed < 3300) {
         const sweepProgress = (elapsed - 2100) / 1200;
         const sweepX = width * 0.2 + width * 0.6 * sweepProgress;
@@ -394,14 +374,12 @@ export function CinematicIntro({ onComplete, isOpen }: CinematicIntroProps) {
       }}
       aria-label="Prince Tyagi Portfolio Cinematic Opening Sequence"
     >
-      {/* 3D Particle Canvas */}
       <canvas
         ref={canvasRef}
         className="absolute inset-0 w-full h-full block"
         style={{ touchAction: 'none' }}
       />
 
-      {/* Top Header Controls */}
       <header className="absolute top-6 left-0 right-0 px-6 sm:px-10 flex items-center justify-between z-20 pointer-events-auto">
         <div className="flex items-center gap-2 text-cyan-400/80 font-mono text-[11px] tracking-widest uppercase">
           <Sparkles size={13} className="animate-pulse text-cyan-300" />
@@ -410,7 +388,7 @@ export function CinematicIntro({ onComplete, isOpen }: CinematicIntroProps) {
 
         <button
           onClick={handleSkip}
-          className="flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-cyan-500/30 bg-slate-900/70 hover:bg-cyan-950/60 hover:border-cyan-400/70 text-cyan-200 text-xs font-mono tracking-wide transition-all shadow-lg shadow-cyan-950/40 backdrop-blur-md cursor-pointer group"
+          className="flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-cyan-500/30 bg-slate-900/70 hover:bg-cyan-950/60 hover:border-cyan-400/70 text-cyan-200 text-xs font-mono tracking-wide transition-all shadow-lg shadow-cyan-950/40 backdrop-blur-md cursor-pointer group min-h-[44px]"
           aria-label="Skip cinematic introduction"
         >
           <span>Skip intro</span>
@@ -419,7 +397,6 @@ export function CinematicIntro({ onComplete, isOpen }: CinematicIntroProps) {
         </button>
       </header>
 
-      {/* Center Subtitle Overlay */}
       <div
         className={`absolute top-[58%] sm:top-[56%] z-20 text-center px-4 max-w-2xl transition-all duration-1000 ${
           subtitleVisible
@@ -435,7 +412,6 @@ export function CinematicIntro({ onComplete, isOpen }: CinematicIntroProps) {
         </h2>
       </div>
 
-      {/* Footer Info */}
       <footer className="absolute bottom-6 left-0 right-0 px-6 sm:px-10 flex items-center justify-between z-20 text-slate-500 font-mono text-[10px] tracking-wider pointer-events-none">
         <div className="flex items-center gap-1.5">
           <VolumeX size={12} />
