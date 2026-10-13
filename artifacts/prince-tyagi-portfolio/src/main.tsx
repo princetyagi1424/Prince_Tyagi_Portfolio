@@ -6,6 +6,7 @@ import { ErrorBoundary } from '@/components/error-boundary';
 import './index.css';
 import './responsive.css';
 import './theme.css';
+import './polish.css';
 
 createRoot(document.getElementById('root')!, {
   onCaughtError: (error, errorInfo) => {

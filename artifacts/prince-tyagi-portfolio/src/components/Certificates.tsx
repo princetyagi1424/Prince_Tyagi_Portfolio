@@ -1,25 +1,19 @@
-
 import { ArrowUpRight } from 'lucide-react';
 import { portfolio } from '../data/portfolio';
 
 export function Certificates() {
   return (
-    <section
-      className="section"
-      id="certificates"
-      aria-labelledby="certificates-title"
-    >
+    <section className="section" id="certificates" aria-labelledby="certificates-title">
       <div className="wrap">
         <div className="section-head">
           <div>
-            <span className="section-kicker">05 / Development</span>
+            <span className="section-kicker">05 / Certificates</span>
             <h2 id="certificates-title" className="display">
               Learning beyond<br />the classroom.
             </h2>
           </div>
           <p>
-            Participation, job simulation, and skills certification—each
-            credential named for what it represents.
+            Participation, job simulation, and skills certification—each credential named for what it represents.
           </p>
         </div>
 
@@ -32,18 +26,15 @@ export function Certificates() {
                   src={certificate.image}
                   alt={certificate.alt}
                   loading="lazy"
+                  decoding="async"
                 />
               ) : (
                 <div className="credential-text">
-                  <span className="credential-type">
-                    HackerRank · Skill certification
-                  </span>
+                  <span className="credential-type">HackerRank · Skill certification</span>
                   <strong className="big-mark">
                     Java<br />(Basic)
                   </strong>
-                  <span className="mono muted">
-                    CERTIFICATE OF ACCOMPLISHMENT
-                  </span>
+                  <span className="mono muted">CERTIFICATE OF ACCOMPLISHMENT</span>
                 </div>
               )}
 
@@ -54,17 +45,16 @@ export function Certificates() {
 
                 {certificate.profile && (
                   <a
-                    className="project-links"
+                    className="credential-link"
                     href={certificate.profile}
                     target="_blank"
-                    rel="noreferrer"
-                    style={{ fontSize: 14, color: '#1d4ed8', fontWeight: 700 }}
+                    rel="noopener noreferrer"
                   >
                     HackerRank profile <ArrowUpRight size={14} />
                   </a>
                 )}
 
-                <time className="credential-date">
+                <time className="credential-date" dateTime={certificate.date}>
                   {certificate.date}
                 </time>
               </div>

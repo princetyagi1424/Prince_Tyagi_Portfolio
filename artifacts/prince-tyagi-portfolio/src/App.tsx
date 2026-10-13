@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { About } from './components/About';
 import { Certificates } from './components/Certificates';
 import { CinematicIntro } from './components/CinematicIntro';
@@ -10,6 +10,7 @@ import { Hero } from './components/Hero';
 import { Navigation } from './components/Navigation';
 import { Projects } from './components/Projects';
 import { ScrollEffects } from './components/ScrollEffects';
+import { ScrollToTop } from './components/ScrollToTop';
 import { Skills } from './components/Skills';
 
 function App() {
@@ -37,7 +38,6 @@ function App() {
 
   return (
     <div className="site-shell">
-      {/* 3D Cinematic Opening Sequence inspired by GPT-6 Astra visual reference */}
       <CinematicIntro isOpen={showIntro} onComplete={handleIntroComplete} />
 
       <a className="skip-link" href="#main-content">Skip to content</a>
@@ -54,6 +54,7 @@ function App() {
         <Contact />
       </main>
       <Footer />
+      <ScrollToTop />
     </div>
   );
 }
