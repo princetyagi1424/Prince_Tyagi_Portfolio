@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
-import { Menu, X, Sparkles } from 'lucide-react';
+import { Menu, X, Sparkles, Sun, Moon } from 'lucide-react';
 import { navigation } from '../data/portfolio';
+import { useTheme } from '../hooks/useTheme';
 
 interface NavigationProps {
   onReplayIntro?: () => void;
@@ -9,6 +10,7 @@ interface NavigationProps {
 export function Navigation({ onReplayIntro }: NavigationProps) {
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState('#home');
+  const { theme, toggle, isDark } = useTheme();
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -62,17 +64,6 @@ export function Navigation({ onReplayIntro }: NavigationProps) {
           <span>Prince Tyagi</span>
         </a>
 
-        <button
-          className="menu-toggle"
-          type="button"
-          aria-label={open ? 'Close navigation menu' : 'Open navigation menu'}
-          aria-expanded={open}
-          aria-controls="primary-links"
-          onClick={() => setOpen((value) => !value)}
-        >
-          {open ? <X size={18} /> : <Menu size={18} />}
-        </button>
-
         <div className={`nav-links ${open ? 'open' : ''}`} id="primary-links">
           {navigation.map((item) => (
             <a
@@ -87,16 +78,39 @@ export function Navigation({ onReplayIntro }: NavigationProps) {
           {onReplayIntro && (
             <button
               type="button"
-              className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[13px] font-mono border border-slate-300 text-slate-700 hover:bg-slate-100 hover:border-slate-500 transition-all cursor-pointer"
+              className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[13px] font-mono border border-slate-300 transition-all cursor-pointer"
               onClick={() => {
                 setOpen(false);
                 onReplayIntro();
               }}
               title="Play 3D intro animation"
             >
-              <Sparkles size={11} className="text-blue-700" /> Intro
+              <Sparkles size={11} /> Intro
             </button>
           )}
+        </div>
+
+        <div className="nav-actions" style={{ display: 'flex', alignItems: 'center', gap: 8, marginLeft: 'auto' }}>
+          <button
+            type="button"
+            className="theme-toggle"
+            onClick={toggle}
+            aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+            title={isDark ? 'Light mode' : 'Dark mode'}
+          >
+            {isDark ? <Sun size={18} strokeWidth={2} /> : <Moon size={18} strokeWidth={2} />}
+          </button>
+
+          <button
+            className="menu-toggle"
+            type="button"
+            aria-label={open ? 'Close navigation menu' : 'Open navigation menu'}
+            aria-expanded={open}
+            aria-controls="primary-links"
+            onClick={() => setOpen((value) => !value)}
+          >
+            {open ? <X size={18} /> : <Menu size={18} />}
+          </button>
         </div>
       </nav>
       {open && (
