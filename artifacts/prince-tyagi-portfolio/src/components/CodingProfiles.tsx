@@ -1,8 +1,8 @@
 import { ArrowUpRight, RotateCw, Clock } from 'lucide-react';
 import { portfolio } from '../data/portfolio';
 import { useLeetCodeStats } from '../hooks/useLeetCodeStats';
+import { LeetCodeHeatmap } from './LeetCodeHeatmap';
 
-/** Format a nullable value for display; returns '—' when unavailable. */
 function fmt(v: number | string | null | undefined): string {
   if (v === null || v === undefined) return '—';
   return v.toString();
@@ -29,7 +29,7 @@ export function CodingProfiles() {
             <h2 id="profiles-title" className="display">Practice, in public.</h2>
           </div>
           <p>
-            Public coding profiles, verified problem-solving track records, and live-synced LeetCode statistics.
+            Public coding profiles, verified problem-solving track records, and live-synced LeetCode statistics with activity heatmap.
           </p>
         </div>
         <div className="profiles-layout">
@@ -60,7 +60,6 @@ export function CodingProfiles() {
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
                   <h3>LeetCode Practice</h3>
 
-                  {/* Status badge */}
                   {stats.isLive ? (
                     <span
                       className="pill"
@@ -125,7 +124,7 @@ export function CodingProfiles() {
 
                 {isHistorical && !error && (
                   <p style={{ color: '#475569', fontSize: '12.5px', marginTop: '2px' }}>
-                    Showing verified historical snapshot. Live sync will update automatically.
+                    Showing verified snapshot with calendar. Live sync updates automatically.
                   </p>
                 )}
               </div>
@@ -154,6 +153,14 @@ export function CodingProfiles() {
                 {stats.badgeNote ? ` · ${stats.badgeNote}` : ''}
               </span>
             </div>
+
+            <LeetCodeHeatmap
+              calendar={stats.submissionCalendar}
+              totalActiveDays={stats.totalActiveDays}
+              maxStreak={stats.streak}
+              submissionsPastYear={stats.submissionsPastYear}
+              isLive={stats.isLive}
+            />
           </article>
         </div>
       </div>
