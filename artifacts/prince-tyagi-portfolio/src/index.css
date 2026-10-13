@@ -916,3 +916,52 @@ body::after {
   .contact-panel { padding: 22px; gap: 28px; }
   .interest-list { grid-template-columns: 1fr; }
 }
+
+/* ===== Phase 1: particle hero + detailed project cards ===== */
+.hero-visual { min-height: 440px; margin-left: 0; display: flex; align-items: center; }
+.particle-hero {
+  position: relative; width: 100%; height: 420px; touch-action: pan-y; border-radius: 22px;
+  background: radial-gradient(ellipse at 50% 50%, rgba(29,78,216,.09), rgba(124,58,237,.04) 45%, transparent 72%);
+}
+.particle-hero canvas { display: block; }
+.particle-caption { position: absolute; left: 0; right: 0; bottom: 6px; text-align: center; color: var(--ink-3); font: 12px var(--app-font-mono); pointer-events: none; }
+
+.project-card { cursor: default; grid-template-columns: 200px 1fr; align-items: start; }
+.project-card.has-link { cursor: pointer; }
+.project-art { align-self: start; max-width: 200px; }
+.project-art.fire { color: #c2410c; background: radial-gradient(ellipse at 50% 52%, rgba(234,88,12,.13), #f8fafc 72%); }
+.project-art.chess { color: #4338ca; background: radial-gradient(ellipse at 50% 52%, rgba(79,70,229,.12), #f8fafc 72%); }
+.project-art.gesture { color: var(--brand); }
+.project-shot { width: 100%; border-radius: 14px; border: 1px solid var(--line); }
+.project-main h3 { font-size: clamp(24px, 2.4vw, 30px); }
+.project-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; margin: 14px 0 6px; }
+.project-cols h4, .project-sub { margin: 0 0 4px; color: var(--brand); font: 700 12px var(--app-font-mono); letter-spacing: .1em; text-transform: uppercase; }
+.project-sub { margin-top: 16px; }
+.project-cols p { margin: 0; color: var(--ink-2); font-size: 15.5px; line-height: 1.65; }
+.project-details { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 22px; margin: 6px 0 0; padding: 0; list-style: none; }
+.project-details li { display: flex; align-items: center; gap: 8px; color: var(--ink-2); font-size: 15px; }
+.project-details li::before { content: ''; flex: none; width: 5px; height: 5px; border-radius: 50%; background: var(--brand); }
+.project-note { margin: 14px 0 0 !important; color: var(--ink-3) !important; font-size: 14px !important; font-style: italic; }
+.project-links { margin-top: 18px; gap: 10px; }
+.project-demo, .project-repo { display: inline-flex; align-items: center; gap: 7px; min-height: 42px; padding: 0 18px; border-radius: 999px; font-size: 15px; font-weight: 700; }
+.project-demo { position: static; background: var(--brand); color: #fff !important; }
+.project-demo::after { content: ''; position: absolute; inset: 0; border-radius: 18px; }
+.project-demo:focus-visible::after { outline: 3px solid var(--brand); outline-offset: 3px; }
+.project-repo { position: relative; z-index: 2; border: 1.5px solid #94a3b8; color: var(--ink) !important; background: #fff; }
+.project-repo:hover { border-color: var(--brand); color: var(--brand) !important; }
+.project-card:hover .project-demo { background: var(--brand-2); }
+.local-label { color: var(--ink-3); font-size: 14px; }
+
+@media (max-width: 1000px) {
+  .particle-hero { height: 340px; }
+  .hero-visual { min-height: 340px; }
+  .project-card { grid-template-columns: 1fr; }
+  .project-art { max-width: 140px; }
+}
+@media (max-width: 700px) {
+  .particle-hero { height: 280px; }
+  .project-cols, .project-details { grid-template-columns: 1fr; }
+}
+@media (prefers-reduced-motion: reduce) { .particle-caption { display: none; } }
+.project-links a.project-demo, .project-links a.project-repo { font-size: 15px; }
+.project-links a.project-demo:hover { transform: none; color: #fff; }

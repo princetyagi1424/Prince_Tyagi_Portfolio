@@ -1,14 +1,14 @@
 import React from 'react';
-import { Terminal, Cpu, Globe, Database, GitBranch, Layers } from 'lucide-react';
+import { Terminal, Cpu, Globe, Database, GitBranch, Eye } from 'lucide-react';
 import { portfolio } from '../data/portfolio';
 
 const categoryIcons: Record<string, React.ReactNode> = {
-  'Programming': <Terminal size={16} className="text-blue-700" />,
-  'Data structures & algorithms': <Cpu size={16} className="text-indigo-400" />,
-  'Web': <Globe size={16} className="text-sky-400" />,
-  'Database': <Database size={16} className="text-teal-400" />,
-  'Tools & workflow': <GitBranch size={16} className="text-violet-400" />,
-  'Foundations': <Layers size={16} className="text-blue-400" />,
+  'Programming Languages': <Terminal size={18} className="text-blue-700" />,
+  'DSA & Core CS': <Cpu size={18} className="text-indigo-700" />,
+  'Web Development': <Globe size={18} className="text-sky-700" />,
+  'AI & Computer Vision': <Eye size={18} className="text-violet-700" />,
+  'Data Science': <Database size={18} className="text-teal-700" />,
+  'Developer Tools': <GitBranch size={18} className="text-blue-700" />,
 };
 
 export function Skills() {

@@ -1,6 +1,6 @@
 import { ArrowDownRight, ArrowUpRight, Download } from 'lucide-react';
 import { portfolio, resume } from '../data/portfolio';
-import { Scene3D } from './Scene3D';
+import { ParticleName } from './ParticleName';
 
 interface HeroProps {
   onReplayIntro?: () => void;
@@ -14,7 +14,9 @@ export function Hero(_props: HeroProps) {
           <div className="hero-status flex items-center gap-2.5 px-3 py-1.5 rounded-full border border-slate-300 bg-white">
             <img
               src="/prince-tyagi.jpg"
-              alt="Prince Tyagi"
+              alt="Portrait of Prince Tyagi"
+              width={24}
+              height={24}
               className="w-6 h-6 rounded-full object-cover border border-slate-300"
             />
             <span className="status-dot" />
@@ -34,14 +36,14 @@ export function Hero(_props: HeroProps) {
           </p>
 
           <div className="hero-actions">
-            <a className="button button-primary" href={resume.url} download={resume.filename}>
+            <a className="button button-primary" href="#projects">
+              View Projects <ArrowDownRight size={16} />
+            </a>
+            <a className="button button-ghost" href={resume.url} download={resume.filename}>
               <Download size={16} /> {resume.label}
             </a>
-            <a className="button button-ghost" href="#projects">
-              Explore projects <ArrowDownRight size={15} />
-            </a>
             <a className="button button-ghost" href="#contact">
-              Contact me <ArrowUpRight size={14} />
+              Contact Me <ArrowUpRight size={16} />
             </a>
           </div>
 
@@ -53,14 +55,11 @@ export function Hero(_props: HeroProps) {
         </div>
 
         <div className="hero-visual">
-          <Scene3D />
+          <ParticleName text="PRINCE" />
         </div>
       </div>
 
       <span className="hero-index font-mono">PORTFOLIO / 2026</span>
-      <a className="scroll-cue" href="#about" aria-label="Scroll to About section">
-        Scroll to explore
-      </a>
     </section>
   );
 }

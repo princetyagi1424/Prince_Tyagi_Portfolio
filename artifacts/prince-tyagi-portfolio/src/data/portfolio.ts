@@ -1,3 +1,9 @@
+export interface Project {
+  id: string; title: string; kind: string; role: string; status: string;
+  problem: string; solution: string; features: string[]; technologies: string[];
+  url?: string; repo?: string; screenshot?: string; note?: string;
+}
+
 export const portfolio = {
   person: {
     name: 'Prince Tyagi',
@@ -21,33 +27,51 @@ export const portfolio = {
     'Web projects',
   ],
   skills: [
-    { title: 'Programming', note: 'Java is my primary language; C at intermediate knowledge and Python foundational', tags: ['Java', 'C · variables, loops, functions, arrays, strings, pointers, structures', 'Python · variables, loops, functions, lists, dictionaries'] },
-    { title: 'Data structures & algorithms', note: 'Topics I practise in Java', tags: ['Arrays', 'Strings', 'Sorting', 'Binary search', 'Sliding window', 'Linked lists', 'Recursion', 'Time & space complexity', 'ArrayList', 'HashMap', 'HashSet', 'LinkedList'] },
-    { title: 'Web', note: 'Foundational web development', tags: ['HTML', 'CSS', 'JavaScript'] },
-    { title: 'Database', note: 'MongoDB fundamentals', tags: ['MongoDB', 'MongoDB Atlas', 'CRUD'] },
-    { title: 'Tools & workflow', note: 'GitHub workflow: clone, commit, push, create and switch branches', tags: ['Git', 'GitHub', 'VS Code', 'IntelliJ IDEA', 'Google Colab'] },
-    { title: 'Foundations', note: 'Computer science fundamentals', tags: ['Object-oriented programming', 'Basic OS concepts', 'Basic networking concepts', 'NumPy', 'Pandas', 'OpenCV (project use)'] },
+    { title: 'Programming Languages', note: 'Java is my primary language; C at intermediate knowledge and Python foundational', tags: ['Java', 'C', 'Python'] },
+    { title: 'DSA & Core CS', note: 'Topics I practise in Java', tags: ['Data structures & algorithms', 'Object-oriented programming', 'Arrays', 'Strings', 'Sorting', 'Binary search', 'Sliding window', 'Linked lists', 'Recursion', 'Time & space complexity', 'ArrayList', 'HashMap', 'HashSet', 'LinkedList', 'Basic OS concepts', 'Basic networking concepts'] },
+    { title: 'Web Development', note: 'Used in my browser-based projects', tags: ['HTML', 'CSS', 'JavaScript', 'React', 'Tailwind CSS'] },
+    { title: 'AI & Computer Vision', note: 'Used in my fire and smoke detection prototype', tags: ['OpenCV', 'YOLO-based object detection', 'Fire and smoke detection'] },
+    { title: 'Data Science', note: 'Foundational libraries', tags: ['NumPy', 'Pandas'] },
+    { title: 'Developer Tools', note: 'GitHub workflow: clone, commit, push, create and switch branches', tags: ['Git', 'GitHub', 'VS Code', 'IntelliJ IDEA', 'Vite', 'Google Colab', 'MongoDB (fundamentals)', 'MongoDB Atlas'] },
   ],
-  projects: [
+  projects: ([
     {
       id: '01', title: 'Hand Gesture Box Creator', kind: 'gesture',
-      role: 'Frontend Developer · Individual project',
-      date: 'August 2026',
-      summary: 'A browser-based hand gesture recognition application that lets users draw and move boxes using real-time hand gestures. Camera processing runs entirely in the browser, helping keep video data on the user\'s device.',
-      features: ['Pinch-to-draw boxes', 'Two-finger movement', 'Open-hand idle detection and fist-based box clearing'],
+      role: 'Frontend Developer · Individual project', status: 'August 2026',
+      problem: 'Create and move shapes on screen without a mouse or touchscreen.',
+      solution: 'A browser app that recognises hand gestures in real time with MediaPipe Hands and turns them into drawing and movement. Camera processing runs entirely in the browser, helping keep video data on the user\'s device.',
+      features: ['Pinch-to-draw boxes', 'Two-finger movement', 'Open-hand idle detection', 'Fist gesture clears boxes'],
       technologies: ['JavaScript', 'MediaPipe Hands', 'HTML', 'CSS', 'Web Camera API'],
       url: 'https://handboxp.netlify.app/',
     },
     {
       id: '02', title: 'GLA Campus Navigator', kind: 'map',
-      role: 'Frontend Developer (React) · Team of 2',
-      date: 'October 2026 – Present',
-      summary: 'A responsive campus navigation web app for GLA University, Mathura. Students can pick their current location using GPS or choose a starting point and destination manually, then see walking routes, estimated distance, travel time and turn-by-turn directions on an interactive map.',
-      features: ['GPS or manual start point', 'Walking routes with distance and time', 'Turn-by-turn directions on interactive maps'],
+      role: 'Frontend Developer (React) · Team of 2', status: 'October 2026 – Present',
+      problem: 'Students need a quick way to find their way around the GLA University campus in Mathura.',
+      solution: 'A responsive React web app where students pick their location with GPS (or choose a start point manually) and a destination, then see the route on an interactive map.',
+      features: ['GPS or manual starting point', 'Walking routes on an interactive map', 'Estimated distance and travel time', 'Turn-by-turn directions'],
       technologies: ['React', 'JavaScript', 'Leaflet', 'OpenStreetMap', 'HTML', 'CSS', 'GPS', "Dijkstra's Algorithm"],
       url: 'https://campus-navigator--liyorajcs25.replit.app/',
     },
-  ],
+    {
+      id: '03', title: 'AI-Based Fire & Smoke Detection System', kind: 'fire',
+      role: 'Personal project', status: 'Local prototype · not deployed',
+      problem: 'Detect fire and smoke automatically from a webcam stream or an uploaded image instead of relying on someone watching.',
+      solution: 'A Python prototype that uses OpenCV with a YOLO-based detection approach, and raises an alarm plus email alerts that include the detected image.',
+      features: ['Live webcam detection', 'Image upload and detection', 'Alarm and email alerts with detected images'],
+      technologies: ['Python', 'OpenCV', 'YOLO-based detection'],
+      note: 'Prototype / educational project, not a certified fire-safety system. Tested locally; no detection metrics are published.',
+    },
+    {
+      id: '04', title: 'Chess Game', kind: 'chess',
+      role: 'Personal project', status: 'Local project · not deployed',
+      problem: 'Play chess in the browser with the rules enforced, against another person or a computer.',
+      solution: 'A browser chess game built with HTML, CSS and JavaScript that uses an external chess-rules library for move validation.',
+      features: ['Legal moves, check and checkmate', 'Castling', 'Two-player mode', 'Computer-opponent mode', 'Restart'],
+      technologies: ['HTML', 'CSS', 'JavaScript', 'External chess rules library'],
+      note: 'The computer opponent\'s move-selection strategy is not documented.',
+    },
+  ] as Project[]),
   education: {
     degree: 'B.Tech, Computer Science Engineering (AI & Data Science)',
     university: 'GLA University, Mathura',
@@ -104,7 +128,7 @@ export const portfolio = {
   },
 };
 
-export const resume = { url: '/Prince_Tyagi_Resume.pdf', filename: 'Prince_Tyagi_Resume.pdf', label: 'Fetch My Resume' };
+export const resume = { url: '/Prince_Tyagi_Resume.pdf', filename: 'Prince_Tyagi_Resume.pdf', label: 'Download Resume' };
 
 export const navigation = [
   { label: 'Home', href: '#home' },
