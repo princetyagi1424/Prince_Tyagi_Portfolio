@@ -30,18 +30,17 @@ export function ParticleName({ text = 'PRINCE' }: { text?: string }) {
     let parts: Particle[] = [];
     let groups: Particle[][] = [];
     const pointer = { x: -9999, y: -9999, active: false };
-    const look = { x: 0, y: 0, tx: 0, ty: 0 }; // smoothed parallax target
+    const look = { x: 0, y: 0, tx: 0, ty: 0 };
 
     const build = () => {
       const rect = wrap.getBoundingClientRect();
       w = Math.max(260, Math.floor(rect.width));
-      h = Math.max(240, Math.floor(rect.height));
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      h = Math.max(120, Math.floor(rect.height));
+      const dpr = Math.min(window.devicePixelRatio || 1, w < 520 ? 1.25 : 1.75);
       canvas.width = w * dpr; canvas.height = h * dpr;
       canvas.style.width = `${w}px`; canvas.style.height = `${h}px`;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-      // 1. rasterise the word off-screen and sample its pixels as particle targets
       const off = document.createElement('canvas');
       off.width = w; off.height = h;
       const o = off.getContext('2d', { willReadFrequently: true });
@@ -53,13 +52,12 @@ export function ParticleName({ text = 'PRINCE' }: { text?: string }) {
       o.textAlign = 'center'; o.textBaseline = 'middle';
       o.fillText(text, w / 2, h / 2);
       const data = o.getImageData(0, 0, w, h).data;
-      const step = w < 520 ? 4 : 3;
+      const step = w < 400 ? 5 : w < 640 ? 4 : 3;
       const targets: [number, number][] = [];
       for (let y = 0; y < h; y += step)
         for (let x = 0; x < w; x += step)
           if (data[(y * w + x) * 4 + 3] > 128) targets.push([x, y]);
 
-      // 2. create particles (scattered start => assemble animation)
       const next: Particle[] = [];
       const mk = (tx: number, ty: number, ambient: boolean): Particle => {
         const z = 0.6 + Math.random() * 0.8;
@@ -70,7 +68,7 @@ export function ParticleName({ text = 'PRINCE' }: { text?: string }) {
         };
       };
       targets.forEach(([tx, ty]) => next.push(mk(tx, ty, false)));
-      const dust = w < 520 ? 35 : 80;
+      const dust = w < 400 ? 18 : w < 640 ? 30 : 70;
       for (let i = 0; i < dust; i++) next.push(mk(Math.random() * w, Math.random() * h, true));
       parts = next;
       groups = Array.from({ length: COLORS.length * 2 }, () => []);
