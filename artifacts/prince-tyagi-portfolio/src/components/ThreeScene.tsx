@@ -7,6 +7,7 @@ const pointer = new THREE.Vector2();
 const targetPointer = new THREE.Vector2();
 let scrollTarget = 0;
 
+/** Lighter spiral (~1200 pts instead of 2800) to keep the 3D chunk small. */
 function makeSpiral(count: number) {
   const positions = new Float32Array(count * 3);
   const colors = new Float32Array(count * 3);
@@ -44,7 +45,8 @@ function StarSpiral() {
   const stars = useRef<Points>(null);
   const orbitalPaths = useRef<Group>(null);
   const coreMesh = useRef<THREE.Mesh>(null);
-  const spiral = useMemo(() => makeSpiral(2800), []);
+  // Reduced particle count for smaller bundle / faster GPU
+  const spiral = useMemo(() => makeSpiral(1200), []);
 
   useEffect(() => {
     const onPointer = (event: PointerEvent) => {
@@ -131,7 +133,7 @@ function StarSpiral() {
         </bufferGeometry>
         <pointsMaterial
           vertexColors
-          size={0.028}
+          size={0.032}
           transparent
           opacity={0.92}
           sizeAttenuation
@@ -141,16 +143,17 @@ function StarSpiral() {
       </points>
 
       <group ref={orbitalPaths}>
+        {/* Lower radial segments for lighter geometry */}
         <mesh rotation={[1.12, 0.18, -0.32]}>
-          <torusGeometry args={[1.72, 0.0035, 4, 180, Math.PI * 1.6]} />
+          <torusGeometry args={[1.72, 0.0035, 3, 96, Math.PI * 1.6]} />
           <meshBasicMaterial color="#38bdf8" transparent opacity={0.4} />
         </mesh>
         <mesh rotation={[0.52, 0.9, 0.24]}>
-          <torusGeometry args={[2.22, 0.003, 4, 180, Math.PI * 1.7]} />
+          <torusGeometry args={[2.22, 0.003, 3, 96, Math.PI * 1.7]} />
           <meshBasicMaterial color="#a78bfa" transparent opacity={0.3} />
         </mesh>
         <mesh rotation={[1.46, 0.2, 0.7]}>
-          <torusGeometry args={[0.55, 0.0045, 4, 96]} />
+          <torusGeometry args={[0.55, 0.0045, 3, 64]} />
           <meshBasicMaterial color="#e0f2fe" transparent opacity={0.55} />
         </mesh>
       </group>
@@ -182,9 +185,9 @@ export default function ThreeScene() {
     <div className="three-canvas" aria-hidden="true">
       <Canvas
         frameloop={pageVisible ? 'always' : 'never'}
-        dpr={[1, 1.5]}
+        dpr={[1, 1.25]}
         camera={{ position: [0, 0, 6.2], fov: 44 }}
-        gl={{ alpha: true, antialias: true, powerPreference: 'high-performance' }}
+        gl={{ alpha: true, antialias: false, powerPreference: 'high-performance' }}
         fallback={<span>3D scene unavailable</span>}
       >
         <ambientLight intensity={0.6} />
