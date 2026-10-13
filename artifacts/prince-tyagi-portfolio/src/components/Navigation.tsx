@@ -36,6 +36,15 @@ export function Navigation({ onReplayIntro }: NavigationProps) {
     return () => window.removeEventListener('keydown', closeOnEscape);
   }, [open]);
 
+  useEffect(() => {
+    if (!open) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = prev;
+    };
+  }, [open]);
+
   return (
     <div className="nav-wrap">
       <nav className="nav" aria-label="Main navigation">
@@ -46,7 +55,6 @@ export function Navigation({ onReplayIntro }: NavigationProps) {
               alt="Prince Tyagi"
               className="w-full h-full object-cover object-center"
               onError={(e) => {
-                // If image fails to load, show PT text fallback
                 e.currentTarget.style.display = 'none';
               }}
             />
@@ -91,6 +99,21 @@ export function Navigation({ onReplayIntro }: NavigationProps) {
           )}
         </div>
       </nav>
+      {open && (
+        <button
+          type="button"
+          aria-label="Close menu"
+          onClick={() => setOpen(false)}
+          style={{
+            position: 'fixed',
+            inset: 0,
+            zIndex: 30,
+            background: 'rgba(0,0,0,0.45)',
+            border: 'none',
+            cursor: 'pointer',
+          }}
+        />
+      )}
     </div>
   );
 }
