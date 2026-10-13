@@ -5,6 +5,7 @@ import { ErrorBoundary } from '@/components/error-boundary';
 
 import './index.css';
 import './responsive.css';
+import './theme.css';
 
 createRoot(document.getElementById('root')!, {
   onCaughtError: (error, errorInfo) => {
