@@ -158,16 +158,51 @@ async function fetchFromGraphQL(username: string) {
   }
 }
 
-export async function onRequestGet(): Promise<Response> {
-  const corsHeaders = {
-    "Access-Control-Allow-Origin": "*",
+/** Allowed browser origins for CORS (not auth — public data still fetchable server-to-server). */
+const ALLOWED_ORIGINS = new Set([
+  "https://prince-tyagi-portfolio.pages.dev",
+  "http://localhost:5173",
+  "http://127.0.0.1:5173",
+  "http://localhost:3000",
+  "http://127.0.0.1:3000",
+]);
+
+function corsHeadersFor(request?: Request): Record<string, string> {
+  const origin = request?.headers.get("Origin") || "";
+  const allow =
+    origin && ALLOWED_ORIGINS.has(origin) ? origin : "https://prince-tyagi-portfolio.pages.dev";
+  return {
+    "Access-Control-Allow-Origin": allow,
     "Access-Control-Allow-Methods": "GET, HEAD, OPTIONS",
     "Access-Control-Allow-Headers": "Content-Type",
+    "Access-Control-Max-Age": "86400",
+    "Vary": "Origin",
     "Content-Type": "application/json; charset=utf-8",
+    "X-Content-Type-Options": "nosniff",
+    "Cache-Control": "public, max-age=60, s-maxage=180, stale-while-revalidate=600",
   };
+}
+
+function jsonResponse(
+  body: unknown,
+  status: number,
+  request: Request | undefined,
+  cacheControl?: string
+): Response {
+  const headers = corsHeadersFor(request);
+  if (cacheControl) headers["Cache-Control"] = cacheControl;
+  return new Response(JSON.stringify(body), { status, headers });
+}
+
+export async function onRequestGet(context: { request: Request }): Promise<Response> {
+  const request = context.request;
+
+  if (request.method !== "GET" && request.method !== "HEAD") {
+    return jsonResponse({ error: "Method not allowed" }, 405, request, "no-store");
+  }
 
   try {
-    let result: any = null;
+    let result: unknown = null;
     try {
       result = await fetchFromGraphQL(LEETCODE_USERNAME);
     } catch {
@@ -175,53 +210,40 @@ export async function onRequestGet(): Promise<Response> {
     }
 
     if (result) {
-      return new Response(JSON.stringify(result), {
-        status: 200,
-        headers: {
-          ...corsHeaders,
-          "Cache-Control": "public, max-age=60, s-maxage=180, stale-while-revalidate=600",
-        },
-      });
+      return jsonResponse(result, 200, request);
     }
 
-    return new Response(
-      JSON.stringify({
+    return jsonResponse(
+      {
         ...FALLBACK_DATA,
         isLive: false,
         stale: true,
         error: "Upstream LeetCode temporarily unreachable; serving verified snapshot with calendar.",
-      }),
-      {
-        status: 200,
-        headers: {
-          ...corsHeaders,
-          "Cache-Control": "public, max-age=30, s-maxage=60",
-        },
-      }
+      },
+      200,
+      request,
+      "public, max-age=30, s-maxage=60"
     );
-  } catch (err: any) {
-    return new Response(
-      JSON.stringify({
+  } catch (err: unknown) {
+    const message = err instanceof Error ? err.message : "Internal error; serving verified snapshot.";
+    return jsonResponse(
+      {
         ...FALLBACK_DATA,
         isLive: false,
         stale: true,
-        error: err?.message || "Internal error; serving verified snapshot.",
-      }),
-      { status: 200, headers: { ...corsHeaders, "Cache-Control": "no-cache" } }
+        error: message.slice(0, 200),
+      },
+      200,
+      request,
+      "no-cache"
     );
   }
 }
 
-export async function onRequestOptions(): Promise<Response> {
-  return new Response(null, {
-    status: 204,
-    headers: {
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Methods": "GET, HEAD, OPTIONS",
-      "Access-Control-Allow-Headers": "Content-Type",
-      "Access-Control-Max-Age": "86400",
-    },
-  });
+export async function onRequestOptions(context: { request: Request }): Promise<Response> {
+  const headers = corsHeadersFor(context.request);
+  delete headers["Content-Type"];
+  return new Response(null, { status: 204, headers });
 }
 
 export const onRequest = onRequestGet;
