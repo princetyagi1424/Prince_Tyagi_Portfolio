@@ -30,31 +30,22 @@ export const portfolio = {
   ],
   projects: [
     {
-      id: '01', title: 'AI-Based Fire & Smoke Detection System', kind: 'fire',
-      summary: 'A Python-based fire and smoke detection prototype using OpenCV and a YOLO-based detection approach. It supports live webcam detection and image-upload detection, with alarm and email alerts that include detected images. The project has been tested locally; quantitative detection metrics and public deployment are not yet available.',
-      features: ['Live webcam detection', 'Image upload and detection', 'Alarm and email alerts with detected images'],
-      technologies: ['Python', 'OpenCV', 'YOLO-based detection'],
-      status: 'Local project — public repository/demo not published yet.',
-      caveat: 'Prototype / educational project — not a certified fire-safety system.',
+      id: '01', title: 'Hand Gesture Box Creator', kind: 'gesture',
+      role: 'Frontend Developer · Individual project',
+      date: 'August 2026',
+      summary: 'A browser-based hand gesture recognition application that lets users draw and move boxes using real-time hand gestures. Camera processing runs entirely in the browser, helping keep video data on the user\'s device.',
+      features: ['Pinch-to-draw boxes', 'Two-finger movement', 'Open-hand idle detection and fist-based box clearing'],
+      technologies: ['JavaScript', 'MediaPipe Hands', 'HTML', 'CSS', 'Web Camera API'],
+      url: 'https://handboxp.netlify.app/',
     },
     {
-      id: '02', title: 'Chess Game', kind: 'chess',
-      summary: 'A browser-based chess game built with HTML, CSS, and JavaScript, using a chess rules library for move validation. Features include legal moves, check/checkmate, castling, two-player play, a computer-opponent mode, and restart functionality.',
-      features: ['Legal moves, check and checkmate', 'Castling and two-player mode', 'Computer-opponent mode and restart'],
-      technologies: ['HTML', 'CSS', 'JavaScript', 'External chess rules library'],
-      status: 'Local project — public repository/demo not published yet.',
-      caveat: 'The computer opponent’s internal move-selection strategy has not been documented or verified.',
-    },
-    {
-      id: '03', title: 'Java DSA Practice', kind: 'dsa',
-      summary: 'An ongoing coding-practice and DSA collection across public repositories. The work includes practice with arrays, strings, sorting, binary search, and sliding-window techniques.',
-      features: ['LeetCode problem solutions', 'BridgeLabz Year 1 training', 'BridgeLabz Year 2 training'],
-      technologies: ['Java', 'Arrays', 'Strings', 'Sorting', 'Binary search', 'Sliding window'],
-      repositories: [
-        { label: 'LeetCode solutions', url: 'https://github.com/princetyagi1424/Leatcode-Questions-Soln' },
-        { label: 'BridgeLabz · Year 1', url: 'https://github.com/princetyagi1424/Bridgelabz-Training-1Y' },
-        { label: 'BridgeLabz · Year 2', url: 'https://github.com/princetyagi1424/BridgelabzTraining2Y' },
-      ],
+      id: '02', title: 'GLA Campus Navigator', kind: 'map',
+      role: 'Frontend Developer (React) · Team of 2',
+      date: 'October 2026 – Present',
+      summary: 'A responsive campus navigation web app for GLA University, Mathura. Students can pick their current location using GPS or choose a starting point and destination manually, then see walking routes, estimated distance, travel time and turn-by-turn directions on an interactive map.',
+      features: ['GPS or manual start point', 'Walking routes with distance and time', 'Turn-by-turn directions on interactive maps'],
+      technologies: ['React', 'JavaScript', 'Leaflet', 'OpenStreetMap', 'HTML', 'CSS', 'GPS', "Dijkstra's Algorithm"],
+      url: 'https://campus-navigator--liyorajcs25.replit.app/',
     },
   ],
   education: {
@@ -112,6 +103,8 @@ export const portfolio = {
     badgeNote: 'Includes 100 Days Badge 2026 & 50 Days Badge 2026',
   },
 };
+
+export const resume = { url: '/Prince_Tyagi_Resume.pdf', filename: 'Prince_Tyagi_Resume.pdf', label: 'Fetch My Resume' };
 
 export const navigation = [
   { label: 'Home', href: '#home' },

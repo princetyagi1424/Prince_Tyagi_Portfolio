@@ -22,36 +22,36 @@ export function About() {
             <div className="relative z-10 flex flex-col h-full justify-between">
               <div>
                 <span className="eyebrow flex items-center gap-2">
-                  <Sparkles size={12} className="text-cyan-400" />
+                  <Sparkles size={12} className="text-blue-700" />
                   Engineering Profile
                 </span>
               </div>
 
               {/* Portrait Container with Holographic Glass Border */}
-              <div className="my-5 relative rounded-2xl overflow-hidden border border-cyan-500/30 bg-slate-900/60 shadow-xl shadow-cyan-950/30 group-hover:border-cyan-400/60 transition-all duration-500">
+              <div className="my-5 relative rounded-2xl overflow-hidden border border-slate-300 bg-white shadow-lg transition-all duration-500">
                 <img
                   src="/prince-tyagi.png"
                   alt="Prince Tyagi - Computer Science Engineering Student"
                   className="w-full aspect-square object-cover object-center filter contrast-[1.02] group-hover:scale-[1.02] transition-transform duration-700"
                   loading="lazy"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent pointer-events-none" />
-                <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-[11px] font-mono text-cyan-200 backdrop-blur-md bg-slate-900/70 py-1.5 px-3 rounded-lg border border-cyan-500/20">
-                  <span className="flex items-center gap-1.5 font-sans font-medium text-slate-100">
+                
+                <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-[13px] font-mono text-slate-800 bg-white/90 py-1.5 px-3 rounded-lg border border-slate-300">
+                  <span className="flex items-center gap-1.5 font-sans font-medium text-slate-900">
                     <span className="status-dot w-2 h-2" />
                     Prince Tyagi
                   </span>
-                  <span className="text-cyan-400 text-[10px]">Mathura, IN</span>
+                  <span className="text-blue-700 text-[12px]">Mathura, IN</span>
                 </div>
               </div>
 
-              <div className="space-y-1.5 text-xs text-slate-400 font-mono">
-                <div className="flex items-center gap-2 text-slate-300">
-                  <GraduationCap size={13} className="text-cyan-400" />
+              <div className="space-y-1.5 text-sm text-slate-600 font-mono">
+                <div className="flex items-center gap-2 text-slate-800">
+                  <GraduationCap size={13} className="text-blue-700" />
                   <span>GLA University (2025–2029)</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <MapPin size={13} className="text-indigo-400" />
+                  <MapPin size={13} className="text-indigo-700" />
                   <span>Mathura, Uttar Pradesh, India</span>
                 </div>
               </div>

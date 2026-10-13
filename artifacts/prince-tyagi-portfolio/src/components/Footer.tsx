@@ -1,4 +1,4 @@
-import { navigation, portfolio } from '../data/portfolio';
+import { navigation, portfolio, resume } from '../data/portfolio';
 
 export function Footer() {
   return (
@@ -9,7 +9,7 @@ export function Footer() {
             <img
               src="/prince-tyagi.jpg"
               alt="Prince Tyagi"
-              className="w-5 h-5 rounded-full object-cover border border-cyan-400/40"
+              className="w-5 h-5 rounded-full object-cover border border-slate-300"
             />
             <span>Prince Tyagi</span>
           </a>
@@ -18,6 +18,7 @@ export function Footer() {
         <nav className="footer-links" aria-label="Footer navigation">
           {navigation.filter((item) => ['#about', '#projects', '#profiles', '#contact'].includes(item.href)).map((item) => <a href={item.href} key={item.href}>{item.label}</a>)}
           {portfolio.profiles.slice(0, 2).map((profile) => <a key={profile.name} href={profile.url} target="_blank" rel="noreferrer">{profile.name}</a>)}
+          <a href={resume.url} download={resume.filename}>{resume.label}</a>
           <a className="back-top" href="#home">Back to top ↑</a>
         </nav>
       </div>

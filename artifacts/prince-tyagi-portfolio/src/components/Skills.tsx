@@ -3,7 +3,7 @@ import { Terminal, Cpu, Globe, Database, GitBranch, Layers } from 'lucide-react'
 import { portfolio } from '../data/portfolio';
 
 const categoryIcons: Record<string, React.ReactNode> = {
-  'Programming': <Terminal size={16} className="text-cyan-400" />,
+  'Programming': <Terminal size={16} className="text-blue-700" />,
   'Data structures & algorithms': <Cpu size={16} className="text-indigo-400" />,
   'Web': <Globe size={16} className="text-sky-400" />,
   'Database': <Database size={16} className="text-teal-400" />,
@@ -63,13 +63,13 @@ export function Skills() {
                   <span className="skill-number font-mono">0{index + 1}</span>
                 </div>
               </div>
-              <h3 className="group-hover:text-cyan-300 transition-colors">
+              <h3 className="transition-colors">
                 {group.title}
               </h3>
               <p>{group.note}</p>
               <div className="skill-tags">
                 {group.tags.map((tag) => (
-                  <span key={tag} className="hover:border-cyan-500/40 hover:text-cyan-200 transition-colors">
+                  <span key={tag} className="transition-colors">
                     {tag}
                   </span>
                 ))}

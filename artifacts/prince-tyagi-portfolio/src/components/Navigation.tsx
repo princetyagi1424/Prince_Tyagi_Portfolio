@@ -40,7 +40,7 @@ export function Navigation({ onReplayIntro }: NavigationProps) {
     <div className="nav-wrap">
       <nav className="nav" aria-label="Main navigation">
         <a href="#home" className="brand" onClick={() => setOpen(false)} aria-label="Prince Tyagi, home">
-          <span className="brand-mark relative overflow-hidden border border-cyan-400/50 shadow-sm shadow-cyan-500/20">
+          <span className="brand-mark relative overflow-hidden border border-slate-300">
             <img
               src="/prince-tyagi.jpg"
               alt="Prince Tyagi"
@@ -79,14 +79,14 @@ export function Navigation({ onReplayIntro }: NavigationProps) {
           {onReplayIntro && (
             <button
               type="button"
-              className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-mono border border-cyan-500/30 text-cyan-300 hover:bg-cyan-950/40 hover:border-cyan-400 transition-all cursor-pointer"
+              className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[13px] font-mono border border-slate-300 text-slate-700 hover:bg-slate-100 hover:border-slate-500 transition-all cursor-pointer"
               onClick={() => {
                 setOpen(false);
                 onReplayIntro();
               }}
               title="Play 3D intro animation"
             >
-              <Sparkles size={11} className="text-cyan-400" /> Intro
+              <Sparkles size={11} className="text-blue-700" /> Intro
             </button>
           )}
         </div>
