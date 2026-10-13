@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { ArrowUpRight, RotateCw, Clock } from 'lucide-react';
 import { portfolio } from '../data/portfolio';
 import { useLeetCodeStats } from '../hooks/useLeetCodeStats';
@@ -8,8 +9,24 @@ function fmt(v: number | string | null | undefined): string {
   return v.toString();
 }
 
+/** Heatmap only on tablet / laptop / desktop (width >= 768). */
+function useShowHeatmap() {
+  const [show, setShow] = useState(() =>
+    typeof window !== 'undefined' ? window.matchMedia('(min-width: 768px)').matches : false
+  );
+  useEffect(() => {
+    const mq = window.matchMedia('(min-width: 768px)');
+    const apply = () => setShow(mq.matches);
+    apply();
+    mq.addEventListener('change', apply);
+    return () => mq.removeEventListener('change', apply);
+  }, []);
+  return show;
+}
+
 export function CodingProfiles() {
   const { stats, isLoading, error, refresh } = useLeetCodeStats();
+  const showHeatmap = useShowHeatmap();
 
   const isHistorical = !stats.isLive && stats.isStale;
 
@@ -29,7 +46,8 @@ export function CodingProfiles() {
             <h2 id="profiles-title" className="display">Practice, in public.</h2>
           </div>
           <p>
-            Public coding profiles, verified problem-solving track records, and live-synced LeetCode statistics with activity heatmap.
+            Public coding profiles, verified problem-solving track records, and live-synced LeetCode statistics
+            {showHeatmap ? ' with activity heatmap' : ''}.
           </p>
         </div>
         <div className="profiles-layout">
@@ -71,6 +89,8 @@ export function CodingProfiles() {
                     </span>
                   ) : (
                     <span
+                      className="lc-badge-cached"
+                      title={isHistorical ? 'Showing verified historical snapshot — live sync unavailable' : 'Cached'}
                       style={{
                         padding: '2px 8px',
                         fontSize: '12.5px',
@@ -82,7 +102,6 @@ export function CodingProfiles() {
                         borderRadius: '999px',
                         color: '#a16207',
                       }}
-                      title={isHistorical ? 'Showing verified historical snapshot — live sync unavailable' : 'Cached'}
                     >
                       <Clock size={9} />
                       {isHistorical ? 'Historical' : 'Cached'}
@@ -91,15 +110,15 @@ export function CodingProfiles() {
                 </div>
 
                 <p style={{ display: 'flex', alignItems: 'center', gap: '6px', marginTop: '4px' }}>
-                  <span style={{ fontSize: '13px', color: '#475569' }}>{stats.lastUpdated}</span>
+                  <span className="lc-meta-text" style={{ fontSize: '13px' }}>{stats.lastUpdated}</span>
                   <button
                     onClick={() => refresh()}
                     disabled={isLoading}
                     title="Refresh LeetCode stats"
+                    className="lc-refresh-btn"
                     style={{
                       background: 'none',
                       border: 'none',
-                      color: isLoading ? '#1d4ed8' : '#475569',
                       cursor: isLoading ? 'wait' : 'pointer',
                       display: 'inline-flex',
                       alignItems: 'center',
@@ -107,7 +126,6 @@ export function CodingProfiles() {
                       padding: '2px 6px',
                       borderRadius: '4px',
                       fontSize: '12.5px',
-                      transition: 'color 0.2s',
                     }}
                     aria-label="Refresh LeetCode statistics"
                   >
@@ -123,8 +141,8 @@ export function CodingProfiles() {
                 )}
 
                 {isHistorical && !error && (
-                  <p style={{ color: '#475569', fontSize: '12.5px', marginTop: '2px' }}>
-                    Showing verified snapshot with calendar. Live sync updates automatically.
+                  <p className="lc-meta-text" style={{ fontSize: '12.5px', marginTop: '2px' }}>
+                    Showing verified snapshot. Live sync updates automatically.
                   </p>
                 )}
               </div>
@@ -154,13 +172,15 @@ export function CodingProfiles() {
               </span>
             </div>
 
-            <LeetCodeHeatmap
-              calendar={stats.submissionCalendar}
-              totalActiveDays={stats.totalActiveDays}
-              maxStreak={stats.streak}
-              submissionsPastYear={stats.submissionsPastYear}
-              isLive={stats.isLive}
-            />
+            {showHeatmap && (
+              <LeetCodeHeatmap
+                calendar={stats.submissionCalendar}
+                totalActiveDays={stats.totalActiveDays}
+                maxStreak={stats.streak}
+                submissionsPastYear={stats.submissionsPastYear}
+                isLive={stats.isLive}
+              />
+            )}
           </article>
         </div>
       </div>
