@@ -1,4 +1,4 @@
-import { ArrowDownRight, ArrowUpRight, Download, Sparkles } from 'lucide-react';
+import { ArrowDownRight, ArrowUpRight, Download } from 'lucide-react';
 import { portfolio, resume } from '../data/portfolio';
 import { Scene3D } from './Scene3D';
 
@@ -6,7 +6,7 @@ interface HeroProps {
   onReplayIntro?: () => void;
 }
 
-export function Hero({ onReplayIntro }: HeroProps) {
+export function Hero(_props: HeroProps) {
   return (
     <section className="hero" id="home" aria-labelledby="hero-title">
       <div className="wrap hero-inner">
@@ -43,16 +43,6 @@ export function Hero({ onReplayIntro }: HeroProps) {
             <a className="button button-ghost" href="#contact">
               Contact me <ArrowUpRight size={14} />
             </a>
-            {onReplayIntro && (
-              <button
-                type="button"
-                className="button button-ghost cursor-pointer"
-                onClick={onReplayIntro}
-                title="Play cinematic 3D particle intro"
-              >
-                <Sparkles size={14} className="text-blue-700" /> Replay Intro
-              </button>
-            )}
           </div>
 
           <div className="hero-meta">

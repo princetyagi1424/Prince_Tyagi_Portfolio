@@ -58,9 +58,9 @@ export function Certificates() {
                     href={certificate.profile}
                     target="_blank"
                     rel="noreferrer"
-                    style={{ fontSize: 11, color: '#8ce1e9' }}
+                    style={{ fontSize: 14, color: '#1d4ed8', fontWeight: 700 }}
                   >
-                    HackerRank profile <ArrowUpRight size={12} />
+                    HackerRank profile <ArrowUpRight size={14} />
                   </a>
                 )}
 

@@ -65,7 +65,7 @@ export function CodingProfiles() {
                     <span
                       className="pill"
                       title="Statistics fetched live from LeetCode"
-                      style={{ padding: '2px 8px', fontSize: '10px', display: 'inline-flex', alignItems: 'center', gap: '4px' }}
+                      style={{ padding: '2px 8px', fontSize: '12.5px', display: 'inline-flex', alignItems: 'center', gap: '4px' }}
                     >
                       <span className="status-dot" style={{ width: '5px', height: '5px' }} />
                       Live
@@ -74,14 +74,14 @@ export function CodingProfiles() {
                     <span
                       style={{
                         padding: '2px 8px',
-                        fontSize: '10px',
+                        fontSize: '12.5px',
                         display: 'inline-flex',
                         alignItems: 'center',
                         gap: '4px',
                         background: 'rgba(234, 179, 8, 0.12)',
                         border: '1px solid rgba(234, 179, 8, 0.35)',
                         borderRadius: '999px',
-                        color: '#eab308',
+                        color: '#a16207',
                       }}
                       title={isHistorical ? 'Showing verified historical snapshot — live sync unavailable' : 'Cached'}
                     >
@@ -92,7 +92,7 @@ export function CodingProfiles() {
                 </div>
 
                 <p style={{ display: 'flex', alignItems: 'center', gap: '6px', marginTop: '4px' }}>
-                  <span style={{ fontSize: '11px', color: '#8898aa' }}>{stats.lastUpdated}</span>
+                  <span style={{ fontSize: '13px', color: '#475569' }}>{stats.lastUpdated}</span>
                   <button
                     onClick={() => refresh()}
                     disabled={isLoading}
@@ -100,14 +100,14 @@ export function CodingProfiles() {
                     style={{
                       background: 'none',
                       border: 'none',
-                      color: isLoading ? '#61d8e7' : '#8898aa',
+                      color: isLoading ? '#1d4ed8' : '#475569',
                       cursor: isLoading ? 'wait' : 'pointer',
                       display: 'inline-flex',
                       alignItems: 'center',
                       gap: '4px',
                       padding: '2px 6px',
                       borderRadius: '4px',
-                      fontSize: '10px',
+                      fontSize: '12.5px',
                       transition: 'color 0.2s',
                     }}
                     aria-label="Refresh LeetCode statistics"
@@ -118,13 +118,13 @@ export function CodingProfiles() {
                 </p>
 
                 {error && (
-                  <p style={{ color: '#eab308', fontSize: '10px', marginTop: '2px' }}>
+                  <p style={{ color: '#a16207', fontSize: '12.5px', marginTop: '2px' }}>
                     {error}
                   </p>
                 )}
 
                 {isHistorical && !error && (
-                  <p style={{ color: '#8898aa', fontSize: '10px', marginTop: '2px' }}>
+                  <p style={{ color: '#475569', fontSize: '12.5px', marginTop: '2px' }}>
                     Showing verified historical snapshot. Live sync will update automatically.
                   </p>
                 )}
