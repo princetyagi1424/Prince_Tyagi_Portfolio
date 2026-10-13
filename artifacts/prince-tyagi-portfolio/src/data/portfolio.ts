@@ -105,7 +105,7 @@ export const portfolio = {
   leetcode: {
     lastReported: 'Verified snapshot (13 Oct 2026, 14:05 IST)',
     solved: '264', easy: '206', medium: '52', hard: '6',
-    rating: '1,480', contests: '1', streak: '46 days', badges: '2',
+    rating: '1,480', contests: '1', streak: '48 days', badges: '2',
     badgeNote: 'Includes 100 Days Badge 2026 & 50 Days Badge 2026',
   },
   github: {
