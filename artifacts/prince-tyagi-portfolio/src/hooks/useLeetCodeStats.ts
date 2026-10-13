@@ -17,11 +17,15 @@ export interface LeetCodeStats {
   isStale?: boolean;
 }
 
-/** Verified historical snapshot — never presented as live. */
+/**
+ * Verified historical snapshot — never presented as live.
+ * Audited against public LeetCode stats API on 13 Oct 2026, 14:05 IST.
+ * totalSolved 264 · easy 206 · medium 52 · hard 6
+ */
 const HISTORICAL_SNAPSHOT: LeetCodeStats = {
   username: 'princeytyagi',
-  totalSolved: 261,
-  easySolved: 203,
+  totalSolved: 264,
+  easySolved: 206,
   mediumSolved: 52,
   hardSolved: 6,
   contestRating: 1480,
@@ -29,12 +33,12 @@ const HISTORICAL_SNAPSHOT: LeetCodeStats = {
   streak: '46 days',
   badgesCount: 2,
   badgeNote: '100 Days Badge 2026, 50 Days Badge 2026',
-  lastUpdated: portfolio.leetcode.lastReported, // 'Historical verified snapshot (11 Oct 2026)'
+  lastUpdated: portfolio.leetcode.lastReported,
   isLive: false,
   isStale: true,
 };
 
-const STORAGE_KEY = 'pt_leetcode_stats_v3';
+const STORAGE_KEY = 'pt_leetcode_stats_v4';
 const REFRESH_INTERVAL_MS = 5 * 60 * 1000; // 5 minutes
 
 /** Parse cached localStorage value. Returns null if invalid or stale format. */
@@ -75,8 +79,6 @@ export function useLeetCodeStats() {
     try {
       let liveData: LeetCodeStats | null = null;
 
-      // ── 1. Same-origin Cloudflare Pages Function (production) ──────────────
-      //       or Vite proxy to local API server (development)
       try {
         const res = await fetch('/api/leetcode/stats', {
           headers: { Accept: 'application/json' },
@@ -85,16 +87,15 @@ export function useLeetCodeStats() {
 
         if (res.ok) {
           const json = await res.json();
-          // Accept only a response that carries actual solved counts AND is marked live
           if (json && typeof json.totalSolved === 'number' && json.isLive === true) {
             const timeStr = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
             const dateStr = new Date().toLocaleDateString([], { day: 'numeric', month: 'short' });
             liveData = {
               username: json.username || 'princeytyagi',
               totalSolved: json.totalSolved,
-              easySolved: typeof json.easySolved === 'number' ? json.easySolved : null,
-              mediumSolved: typeof json.mediumSolved === 'number' ? json.mediumSolved : null,
-              hardSolved: typeof json.hardSolved === 'number' ? json.hardSolved : null,
+              easySolved: typeof json.easySolved === 'number' ? json.easySolved : 0,
+              mediumSolved: typeof json.mediumSolved === 'number' ? json.mediumSolved : 0,
+              hardSolved: typeof json.hardSolved === 'number' ? json.hardSolved : 0,
               contestRating: json.contestRating ?? null,
               contestsAttended: json.contestsAttended ?? null,
               streak: json.streak ?? null,
@@ -105,13 +106,12 @@ export function useLeetCodeStats() {
               isStale: false,
             };
           } else if (json && json.isLive === false && typeof json.totalSolved === 'number') {
-            // Server returned its own verified fallback — respect it, mark as stale
             setStats({
               username: json.username || 'princeytyagi',
               totalSolved: json.totalSolved,
-              easySolved: json.easySolved ?? null,
-              mediumSolved: json.mediumSolved ?? null,
-              hardSolved: json.hardSolved ?? null,
+              easySolved: json.easySolved ?? 0,
+              mediumSolved: json.mediumSolved ?? 0,
+              hardSolved: json.hardSolved ?? 0,
               contestRating: json.contestRating ?? null,
               contestsAttended: json.contestsAttended ?? null,
               streak: json.streak ?? null,
@@ -122,14 +122,13 @@ export function useLeetCodeStats() {
               isStale: true,
             });
             if (isManual) setError('Live sync unavailable · Showing verified historical data');
-            return; // done — don't try public APIs; server already tried them
+            return;
           }
         }
       } catch {
-        // /api not reachable (static mode or offline) — fall through to public APIs
+        // /api not reachable — fall through
       }
 
-      // ── 2. Public CORS proxy (client-side fallback, no server required) ────
       if (!liveData) {
         const publicEndpoints = [
           'https://alfa-leetcode-api.onrender.com/userProfile/princeytyagi',
@@ -151,7 +150,7 @@ export function useLeetCodeStats() {
             const medium = typeof data.mediumSolved === 'number' ? data.mediumSolved : null;
             const hard = typeof data.hardSolved === 'number' ? data.hardSolved : null;
 
-            if (total === null && easy === null) continue; // reject unusable response
+            if (total === null && easy === null) continue;
 
             const timeStr = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
             const dateStr = new Date().toLocaleDateString([], { day: 'numeric', month: 'short' });
@@ -159,38 +158,34 @@ export function useLeetCodeStats() {
             liveData = {
               username: 'princeytyagi',
               totalSolved: total ?? (easy ?? 0) + (medium ?? 0) + (hard ?? 0),
-              easySolved: easy,
-              mediumSolved: medium,
-              hardSolved: hard,
-              // Only values actually present in the upstream response:
+              easySolved: easy ?? 0,
+              mediumSolved: medium ?? 0,
+              hardSolved: hard ?? 0,
               contestRating: typeof data.rating === 'number' ? Math.round(data.rating) : null,
-              contestsAttended: null,   // proxy doesn't return this
-              streak: null,             // proxy doesn't return this reliably
-              badgesCount: null,        // proxy doesn't return this
-              badgeNote: null,          // proxy doesn't return this
+              contestsAttended: null,
+              streak: null,
+              badgesCount: null,
+              badgeNote: null,
               lastUpdated: `Live (proxy) · ${dateStr}, ${timeStr}`,
               isLive: true,
               isStale: false,
             };
             break;
           } catch {
-            // try next endpoint
+            // try next
           }
         }
       }
 
-      // ── 3. Commit or fall back to historical snapshot ────────────────────
       if (liveData) {
         setStats(liveData);
         setLastRefreshedAt(new Date());
         try {
           localStorage.setItem(STORAGE_KEY, JSON.stringify(liveData));
         } catch {
-          // ignore quota errors
+          // ignore
         }
       } else {
-        // No live source responded — keep whatever we already have displayed,
-        // just mark it stale.
         setStats((prev) => ({
           ...prev,
           isLive: false,
@@ -212,12 +207,10 @@ export function useLeetCodeStats() {
     }
   }, []);
 
-  // Fetch on mount
   useEffect(() => {
     fetchStats(false);
   }, [fetchStats]);
 
-  // Refresh every 5 minutes while the tab is visible
   useEffect(() => {
     const interval = setInterval(() => {
       if (!document.hidden) fetchStats(false);
@@ -225,7 +218,6 @@ export function useLeetCodeStats() {
     return () => clearInterval(interval);
   }, [fetchStats]);
 
-  // Refresh when the tab regains focus / becomes visible
   useEffect(() => {
     const handler = () => { if (!document.hidden) fetchStats(false); };
     window.addEventListener('visibilitychange', handler);
