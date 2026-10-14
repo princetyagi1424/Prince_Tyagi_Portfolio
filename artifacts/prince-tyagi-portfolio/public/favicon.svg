@@ -1,3 +1,20 @@
-<svg width="180" height="180" viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg">
-<rect width="180" height="180" rx="36" fill="#FF3C00"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="Prince Tyagi">
+  <defs>
+    <linearGradient id="rim" x1="4" y1="2" x2="28" y2="30" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#22d3ee"/>
+      <stop offset="1" stop-color="#a855f7"/>
+    </linearGradient>
+  </defs>
+  <!-- Dark tile -->
+  <rect width="32" height="32" rx="8" fill="#0a0f1a"/>
+  <!-- Neon rim -->
+  <rect x="1" y="1" width="30" height="30" rx="7" fill="none" stroke="url(#rim)" stroke-width="1.75"/>
+  <!-- P: stem + bowl (light) -->
+  <path fill="#f1f5f9" d="
+    M6.5 6.5 h3.4 v19 H6.5 z
+    M9.9 6.5 h6.2 c3.55 0 5.85 2.2 5.85 5.35 0 3.15-2.3 5.35-5.85 5.35 H9.9 V6.5 z
+    M13.3 9.7 v4.3 h2.7 c1.45 0 2.35-.9 2.35-2.15 0-1.25-.9-2.15-2.35-2.15 h-2.7 z"/>
+  <!-- T: cyan bar + purple stem -->
+  <rect x="17.2" y="6.5" width="8.8" height="3.2" rx="0.6" fill="#22d3ee"/>
+  <rect x="20.5" y="9.7" width="3.3" height="15.8" rx="0.5" fill="#c084fc"/>
 </svg>
