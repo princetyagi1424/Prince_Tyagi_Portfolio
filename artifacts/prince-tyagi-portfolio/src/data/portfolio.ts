@@ -51,7 +51,7 @@ export const portfolio = {
       solution: 'A responsive React web app where students pick their location with GPS (or choose a start point manually) and a destination, then see the route on an interactive map.',
       features: ['GPS or manual starting point', 'Walking routes on an interactive map', 'Estimated distance and travel time', 'Turn-by-turn directions'],
       technologies: ['React', 'JavaScript', 'Leaflet', 'OpenStreetMap', 'HTML', 'CSS', 'GPS', "Dijkstra's Algorithm"],
-      url: 'https://campus-navigator--liyorajcs25.replit.app/',
+      url: 'https://campus-navigation-alpha.vercel.app/',
     },
   ] as Project[]),
   education: {
