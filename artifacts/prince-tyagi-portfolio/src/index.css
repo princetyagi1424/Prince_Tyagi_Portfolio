@@ -969,6 +969,10 @@ body::after {
 /* Expandable certificate list */
 
 .certificate-more-wrap { display:flex; justify-content:center; margin-top:28px; }
-.certificate-more { display:inline-flex; align-items:center; justify-content:center; gap:9px; padding:11px 18px; border:1px solid var(--line); border-radius:999px; background:var(--card-bg); color:var(--ink); font:500 12px var(--app-font-mono); cursor:pointer; transition:transform .2s ease,border-color .2s ease,background .2s ease; }
-.certificate-more:hover { transform:translateY(-2px); border-color:var(--brand); }
+.certificate-more { display:inline-flex; align-items:center; justify-content:center; gap:12px; min-width:230px; padding:15px 25px; border:1px solid var(--card-border); border-radius:16px; background:var(--card-bg); color:var(--ink); font:500 12px var(--app-font-mono); letter-spacing:.035em; cursor:pointer; box-shadow:var(--card-shadow); transition:transform .22s ease,border-color .22s ease,background .22s ease,box-shadow .22s ease; }
+.certificate-more:hover { transform:translateY(-3px); border-color:var(--brand); box-shadow:var(--card-hover-shadow); }
+.certificate-more svg { transition:transform .22s ease; }
+.certificate-more:hover svg { transform:translateY(2px); }
 .certificate-more:focus-visible { outline:2px solid var(--brand); outline-offset:3px; }
+html[data-theme='dark'] .certificate-more { background:var(--card-bg); border-color:var(--card-border); color:var(--ink); }
+html[data-theme='light'] .certificate-more { background:var(--card-bg); border-color:var(--card-border); color:var(--ink); }
