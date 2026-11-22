@@ -30,11 +30,11 @@ export function Certificates() {
                 />
               ) : (
                 <div className="credential-text">
-                  <span className="credential-type">HackerRank · Skill certification</span>
+                  <span className="credential-type">{certificate.type}</span>
                   <strong className="big-mark">
-                    Java<br />(Basic)
+                    {certificate.title}
                   </strong>
-                  <span className="mono muted">CERTIFICATE OF ACCOMPLISHMENT</span>
+                  <span className="mono muted">CERTIFICATE OF APPRECIATION</span>
                 </div>
               )}
 
