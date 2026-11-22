@@ -24,7 +24,7 @@ export function Certificates() {
           </p>
         </div>
 
-        <div className="credential-grid">
+        <div className="credential-grid" id="certificate-list">
           {visibleCertificates.map((certificate) => (
             <article className="credential-card" key={certificate.title}>
               {certificate.image ? (
@@ -76,7 +76,7 @@ export function Certificates() {
               className="certificate-more"
               onClick={() => setShowAll((current) => !current)}
               aria-expanded={showAll}
-              aria-controls="certificates"
+              aria-controls="certificate-list"
             >
               {showAll ? (
                 <>Show less <ChevronUp size={16} /></>
