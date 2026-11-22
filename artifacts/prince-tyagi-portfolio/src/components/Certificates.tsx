@@ -1,7 +1,14 @@
-import { ArrowUpRight } from 'lucide-react';
+import { useState } from 'react';
+import { ArrowUpRight, ChevronDown, ChevronUp } from 'lucide-react';
 import { portfolio } from '../data/portfolio';
 
 export function Certificates() {
+  const [showAll, setShowAll] = useState(false);
+  const visibleCertificates = showAll
+    ? portfolio.certificates
+    : portfolio.certificates.slice(0, 2);
+  const hasMoreCertificates = portfolio.certificates.length > 2;
+
   return (
     <section className="section" id="certificates" aria-labelledby="certificates-title">
       <div className="wrap">
@@ -18,7 +25,7 @@ export function Certificates() {
         </div>
 
         <div className="credential-grid">
-          {portfolio.certificates.map((certificate) => (
+          {visibleCertificates.map((certificate) => (
             <article className="credential-card" key={certificate.title}>
               {certificate.image ? (
                 <img
@@ -61,6 +68,24 @@ export function Certificates() {
             </article>
           ))}
         </div>
+
+        {hasMoreCertificates && (
+          <div className="certificate-more-wrap">
+            <button
+              type="button"
+              className="certificate-more"
+              onClick={() => setShowAll((current) => !current)}
+              aria-expanded={showAll}
+              aria-controls="certificates"
+            >
+              {showAll ? (
+                <>Show less <ChevronUp size={16} /></>
+              ) : (
+                <>Show more certificates <ChevronDown size={16} /></>
+              )}
+            </button>
+          </div>
+        )}
       </div>
     </section>
   );
