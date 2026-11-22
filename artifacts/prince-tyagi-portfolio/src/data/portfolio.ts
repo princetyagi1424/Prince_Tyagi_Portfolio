@@ -91,6 +91,7 @@ export const portfolio = {
       type: 'Certificate of Appreciation · Hackathon participation',
       description: 'Recognised for participating in the BUILD WITH BHARAT 5.0 national-level hackathon by CODEVERSE as part of team 404_SQUAD, demonstrating innovation and technology expertise.',
       date: '6 November 2026',
+      image: '/certificates/build-with-bharat-5.0.jpg',
       alt: 'Build With Bharat 5.0 Certificate of Appreciation awarded to Prince Tyagi for participation with team 404_SQUAD at Microsoft, Gurugram, on 6 November 2026',
     },
     {
