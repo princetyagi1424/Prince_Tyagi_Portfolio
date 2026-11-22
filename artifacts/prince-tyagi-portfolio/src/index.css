@@ -965,3 +965,10 @@ body::after {
 @media (prefers-reduced-motion: reduce) { .particle-caption { display: none; } }
 .project-links a.project-demo, .project-links a.project-repo { font-size: 15px; }
 .project-links a.project-demo:hover { transform: none; color: #fff; }
+
+/* Expandable certificate list */
+
+.certificate-more-wrap { display:flex; justify-content:center; margin-top:28px; }
+.certificate-more { display:inline-flex; align-items:center; justify-content:center; gap:9px; padding:11px 18px; border:1px solid var(--line); border-radius:999px; background:var(--card-bg); color:var(--ink); font:500 12px var(--app-font-mono); cursor:pointer; transition:transform .2s ease,border-color .2s ease,background .2s ease; }
+.certificate-more:hover { transform:translateY(-2px); border-color:var(--brand); }
+.certificate-more:focus-visible { outline:2px solid var(--brand); outline-offset:3px; }
